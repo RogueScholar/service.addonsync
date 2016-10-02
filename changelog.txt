@@ -1,0 +1,8 @@
+v1.0.2 (2016-08-19)
+- Update via robwebset repository
+
+v1.0.1 (2016-05-05)
+- Change auto-check interval into hours rather than minutes
+
+v1.0.0 (2016-04-19)
+- Initial Version
