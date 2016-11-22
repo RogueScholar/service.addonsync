@@ -376,9 +376,10 @@ class AddonData():
                 continue
 
             # Make sure the verson number is the same
-            if addonDetail['version'] != backedUpDetails['version']:
-                log("AddonSync: Version numbers of addon %s are different (%s, %s)" % (addonName, addonDetail['version'], backedUpDetails['version']))
-                continue
+            if Settings.isForceVersionMatch():
+                if addonDetail['version'] != backedUpDetails['version']:
+                    log("AddonSync: Version numbers of addon %s are different (%s, %s)" % (addonName, addonDetail['version'], backedUpDetails['version']))
+                    continue
 
             log("AddonSync: Performing copy for %s" % addonName)
 

@@ -154,6 +154,10 @@ class Settings():
         return ADDON.getSetting('restartUpdatedServiceAddons') == 'true'
 
     @staticmethod
+    def isForceVersionMatch():
+        return ADDON.getSetting('forceVersionMatch') == 'true'
+
+    @staticmethod
     def getFilterType():
         index = int(ADDON.getSetting("filterType"))
         filterType = Settings.FILTER_ALL
