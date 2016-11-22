@@ -115,3 +115,7 @@ msgstr ""
 msgctxt "#32023"
 msgid "Restart Updated Service Addons"
 msgstr ""
+
+msgctxt "#32024"
+msgid "Only Synchronise If Addon Version Matches"
+msgstr ""
