@@ -1,3 +1,6 @@
+v100.1.1 (2016-12-09)
+- Update for support of URepo
+
 v100.1.0 (2016-11-22)
 - Add option it ignore addon versions for resync
 
@@ -9,3 +12,7 @@ v1.0.1 (2016-05-05)
 
 v1.0.0 (2016-04-19)
 - Initial Version
+
+Icon Fonts:
+Forte Regular
+Book Antiqua Italic

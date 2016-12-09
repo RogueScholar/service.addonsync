@@ -10,7 +10,11 @@ More information can be found on the wiki:
 
 [Add-on:AddonSync](https://github.com/robwebset/service.addonsync/wiki)
 
-You can install this addon from: [Repository:robwebset](https://github.com/robwebset/repository.robwebset/blob/master/repos/repository.robwebset/repository.robwebset-1.0.0.zip) ([wiki](https://github.com/robwebset/repository.robwebset/wiki))
+You can install this addon from: [Repository:URepo](http://www.urepo.org/)
+
+For latest developer version: [Repository:robwebset](https://github.com/robwebset/repository.robwebset/blob/master/repos/repository.robwebset/repository.robwebset-1.0.0.zip) ([wiki](https://github.com/robwebset/repository.robwebset/wiki))
+
+To ask questions or comment about AddonSync, please use the forum at [URepo.org](http://www.urepo.org/forum/viewtopic.php?t=1755)
 
 __Donations__
 
