@@ -1,9 +1,6 @@
 [[https://github.com/robwebset/service.addonsync/raw/master/icon.png]]
 
 == Introduction ==
-You can install this addon from: [http://www.urepo.org URepo Repository]
-<br />
-<br />
 The AddonSync service allows you to set one of your Kodi installations as the "Master" and have all the other installations be Slaves. Then you can have the master installation upload to a network share, and the slave installation download them.
 <br />
 <br />
