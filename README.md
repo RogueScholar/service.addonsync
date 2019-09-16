@@ -1,16 +1,11 @@
-__NOTICE__
-
-__This addon is no longer maintained by me, if you are interested in taking it over then please contact me via the Issues section. (You are welcome to submit it to the official Kodi Repo - just make sure you remove my name from it before you do it)__
-
-
 ![AddonSync](icon.png)
 
-There have been several requests over the years for the other addons I have to be able to share their configuration across different installations. For example, PinSentry - to set up the configuration once, AudioBooks - to share the position listened to etc etc.
+There have been several requests over the years for Kodi addons to be able to share their configuration across different installations.
 
-So to support this I have created a new service Addon: "AddonSync". This addon allows you to set one of your Kodi installations as the "Master" and have all the other installations be Slaves. Then you can have the master installation upload to a network share, and the slave installation download them.
+Enter a new Kodi service addon: "AddonSync". This addon allows you to set one of your Kodi installations as the "Master" and have it maintain a private addon settings "repository" in some shared network folder of your choosing, and all the other Kodi installations you have can install this addon as "Slaves" that will download and update the settings for all addons from those the Master has shared every time Kodi starts.
 
 Please feel free to post any comments.
 
 More information can be found on the wiki:
 
-[Add-on:AddonSync](https://github.com/robwebset/service.addonsync/wiki)
+[Add-on:AddonSync](https://github.com/RogueScholar/service.addonsync/wiki)
