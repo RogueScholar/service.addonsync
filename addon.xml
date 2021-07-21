@@ -9,13 +9,27 @@
   <extension point="xbmc.python.script" library="default.py" />
   <extension point="xbmc.addon.metadata">
     <summary lang="en_US">Synchronize addon settings across installations</summary>
-		<description lang="en_US">Maintain uniform addon settings across all of your installations</description>
+    <description lang="en_US">Maintain uniform addon settings across all of your installations</description>
     <news>
       v101.0.0 (2021-07-21)
       - Updated AddonSync to function on Kodi 19 "Matrix" and above
+      v100.3.0 (2019-04-24)
+      - Remove URepo link
+      v100.2.0 (2018-06-01)
+      - Final update
+      v100.1.1 (2016-12-09)
+      - Update with support for URepo
+      v100.1.0 (2016-11-22)
+      - Add option it ignore addon versions for resync
+      v1.0.2 (2016-08-19)
+      - Deliver updates through robwebset repository
+      v1.0.1 (2016-05-05)
+      - Change auto-check interval into hours rather than minutes
+      v1.0.0 (2016-04-19)
+      - Initial release
     </news>
-		<platform>all</platform>
-		<language>en</language>
+    <platform>all</platform>
+    <language>en</language>
 		<license>MPL-2.0</license>
 		<forum></forum>
     <website>https://github.com/RogueScholar/service.addonsync/wiki</website>
