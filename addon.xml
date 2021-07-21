@@ -12,7 +12,7 @@
     <description lang="en_US">Maintain uniform addon settings across all of your installations</description>
     <news>
       v101.0.0 (2021-07-21)
-      - Updated AddonSync to function on Kodi 19 "Matrix" and above
+      - Updated AddonSync to function on Kodi 19.0 "Matrix" and above
       v100.3.0 (2019-04-24)
       - Remove URepo link
       v100.2.0 (2018-06-01)
@@ -36,7 +36,7 @@
     <source>https://github.com/RogueScholar/service.addonsync</source>
     <lifecyclestate type="normal" />
     <assets>
-      <icon>icon.png</icon>
+      <icon>resources/icon.png</icon>
       <fanart>fanart.jpg</fanart>
       <screenshot>resources/screenshot-01.jpg</screenshot>
       <screenshot>resources/screenshot-02.jpg</screenshot>
