@@ -1,27 +1,27 @@
 # Kodi Media Center language file
 # Addon Name: AddonSync
 # Addon id: service.addonsync
-# Addon Provider: robwebset
+# Addon Provider: RogueScholar
 msgid ""
 msgstr ""
-"Project-Id-Version: XBMC Addons\n"
-"Report-Msgid-Bugs-To: alanwww1@xbmc.org\n"
-"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Kodi Translation Team\n"
-"Language-Team: English (http://www.transifex.com/projects/p/xbmc-addons/language/en/)\n"
+"Project-Id-Version: KODI Addons\n"
+"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
+"POT-Creation-Date: 2016-11-22 05:36-0800\n"
+"PO-Revision-Date: 2021-09-28 16:00-0700\n"
+"Last-Translator: https://github.com/RogueScholar\n"
+"Language-Team: English (United Kingdom) (https://kodi.weblate.cloud/languages/en_gb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
+"Language: en_GB\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgctxt "Addon Summary"
-msgid "Synchronise Addon Settings Between Different Installations"
+msgid "Synchronise Add-on Settings Between Instances"
 msgstr ""
 
 msgctxt "Addon Description"
-msgid "Keep all Addon settings in sync across all of your installations"
+msgid "Keep all Add-on settings synchronised across your installations"
 msgstr ""
 
 msgctxt "#32001"
@@ -41,15 +41,15 @@ msgid "Central Store Location"
 msgstr ""
 
 msgctxt "#32005"
-msgid "WARNING: This Addon will, based on the settings, do one of two things. Take a copy of your settings or restore your settings, overwriting the existing values. Please ensure that you are OK with this happening."
+msgid "WARNING: This add-on will (depending on its configuration) do one of two things: make a copy of your settings to share from a network store OR restore your settings from that store, overwriting the current values. Please ensure that this behavior is what you are interested in."
 msgstr ""
 
 msgctxt "#32006"
-msgid "Addon Sync Not Configured"
+msgid "AddonSync Not Configured"
 msgstr ""
 
 msgctxt "#32007"
-msgid "Installation Type"
+msgid "Synchronisation Role"
 msgstr ""
 
 msgctxt "#32008"
@@ -61,11 +61,11 @@ msgid "Slave"
 msgstr ""
 
 msgctxt "#32010"
-msgid "Update Interval (Hours) (0 = Startup Only)"
+msgid "Update Interval (in hours) [0 = at startup only]"
 msgstr ""
 
 msgctxt "#32011"
-msgid "No Addons Available"
+msgid "No Add-ons Available"
 msgstr ""
 
 msgctxt "#32012"
@@ -85,19 +85,19 @@ msgid "Select Excluded"
 msgstr ""
 
 msgctxt "#32016"
-msgid "Addon Synchronise Selection"
+msgid "Add-on Synchronise Selection"
 msgstr ""
 
 msgctxt "#32017"
-msgid "Select Addons"
+msgid "Select Add-ons"
 msgstr ""
 
 msgctxt "#32018"
-msgid "Run On Startup"
+msgid "Run on Startup"
 msgstr ""
 
 msgctxt "#32019"
-msgid "Starting Synchronisation"
+msgid "Starting Synchronisation..."
 msgstr ""
 
 msgctxt "#32020"
@@ -113,9 +113,9 @@ msgid "Run Synchronisation Now"
 msgstr ""
 
 msgctxt "#32023"
-msgid "Restart Updated Service Addons"
+msgid "Restart Updated Service Add-ons"
 msgstr ""
 
 msgctxt "#32024"
-msgid "Only Synchronise If Addon Version Matches"
+msgid "Only Synchronise If Add-on Version Matches"
 msgstr ""
