@@ -26,6 +26,9 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 [.right.text-center]
 image::icon.png[alt="AddonSync logo",width=256,height=256,link=https://kodi.wiki/view/Add-on:AddonSync]
 
+[.center.text-left]
+image::REUSE-compliant.svg[alt="REUSE badge",link=https://api.reuse.software/info/github.com/RogueScholar/service.addonsync]
+
 == Purpose
 
 [.lead]
@@ -54,7 +57,7 @@ specific file. This document (`README.adoc`) is licensed under the terms of the
 {url-ccbysa4}[Creative Commons Attribution 4.0 International License].
 
 [.text-center]
-image::Kodi-logo.png[alt="Kodi logo",width=84,height=124]
+image::Kodi-logo.png[alt="Kodi logo",width=84,height=124,link=https://kodi.tv/]
 
 === Legal
 
@@ -65,6 +68,6 @@ image::Kodi-logo.png[alt="Kodi logo",width=84,height=124]
 Maintained by {url-roguescholar}[RogueScholar].
 
 [.text-center]
-Kodi^(R)^ and the {url-kodilogo}[Kodi logo] are registered trademarks of the
+Kodi^(R)^ and the Kodi logo are registered trademarks of the
 {url-kodifoundation}[Kodi Foundation]
 ====
