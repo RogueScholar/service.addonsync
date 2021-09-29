@@ -2,7 +2,7 @@
 RogueScholar <RogueScholar@users.noreply.github.com>
 
 :sectanchors:
-:imagesdir: resources
+:imagesdir: https://raw.githubusercontent.com/RogueScholar/service.addonsync/master/resources
 :toc: auto
 :toclevels: 1
 
@@ -15,17 +15,16 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 :description: Code repository README page for AddonSync, a Kodi service add-on.
 :keywords: Kodi, add-on, service, settings, synchronization
 :revdate: 2021-09-28
-:revnumber: 1.0.1
+:revnumber: 1.0.2
 // Refs:
 :url-githubwiki: https://github.com/RogueScholar/service.addonsync/wiki
 :url-mpl2: https://mozilla.org/MPL/2.0/
 :url-ccbysa4: https://creativecommons.org/licenses/by/4.0/
 :url-roguescholar: https://github.com/RogueScholar
-:url-kodilogo: https://kodi.wiki/images/c/c9/Logo.png
 :url-kodifoundation: http://kodi.tv/about/foundation
 
 [.right.text-center]
-image::icon.png[alt="AddonSync logo",width=256,height=256,link=]
+image::icon.png[alt="AddonSync logo",width=256,height=256,link=https://kodi.wiki/view/Add-on:AddonSync]
 
 == Purpose
 
@@ -55,7 +54,7 @@ specific file. This document (`README.adoc`) is licensed under the terms of the
 {url-ccbysa4}[Creative Commons Attribution 4.0 International License].
 
 [.text-center]
-image::{url-kodilogo}[alt="Kodi logo",width=135,height=135]
+image::Kodi-logo.png[alt="Kodi logo",width=84,height=124]
 
 === Legal
 
