@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="service.addonsync" name="AddonSync" version="101.0.0" provider-name="RogueScholar"
+<addon id="service.addonsync" name="AddonSync" version="101.0.1" provider-name="RogueScholar"
        xsi:noNamespaceSchemaLocation="https://github.com/xbmc/xbmc/raw/master/addons/xbmc.addon/metadata.xsd">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
@@ -39,7 +39,7 @@
     <lifecyclestate type="normal" />
     <assets>
       <icon>resources/icon.png</icon>
-      <fanart>fanart.jpg</fanart>
+      <fanart>resources/fanart.jpg</fanart>
       <screenshot>resources/screenshot-01.jpg</screenshot>
       <screenshot>resources/screenshot-02.jpg</screenshot>
       <screenshot>resources/screenshot-03.jpg</screenshot>
