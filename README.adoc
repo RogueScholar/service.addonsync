@@ -1,10 +1,38 @@
 = AddonSync
+RogueScholar <RogueScholar@users.noreply.github.com>
 
-image::resources/icon.png[AddonSync]
+:sectanchors:
+:imagesdir: resources
+:toc: auto
+:toclevels: 1
 
+////
+SPDX-FileCopyrightText: © 2020-2021, Peter J. Mello <admin@petermello.net>.
+SPDX-License-Identifier: CC-BY-SA-4.0
+////
+
+// Metadata:
+:description: Code repository README page for AddonSync, a Kodi service add-on.
+:keywords: Kodi, add-on, service, settings, synchronization
+:revdate: 2021-09-28
+:revnumber: 1.0.1
+// Refs:
+:url-githubwiki: https://github.com/RogueScholar/service.addonsync/wiki
+:url-mpl2: https://mozilla.org/MPL/2.0/
+:url-ccbysa4: https://creativecommons.org/licenses/by/4.0/
+:url-roguescholar: https://github.com/RogueScholar
+:url-kodilogo: https://kodi.wiki/images/c/c9/Logo.png
+:url-kodifoundation: http://kodi.tv/about/foundation
+
+[.right.text-center]
+image::icon.png[alt="AddonSync logo",width=256,height=256,link=]
+
+== Purpose
+
+[.lead]
 There have been several requests over the years for Kodi add-ons to be able to
-sync their configuration across different installations. This Kodi ervice addon,
-*AddonSync*, has been built to fill that need.
+sync their configuration across different installations. This Kodi service
+addon, *AddonSync*, has been built to fill that need.
 
 It allows you to set one of your Kodi installations as the "Master" and have it
 maintain a private add-on settings "repository" in some shared network folder of
@@ -12,5 +40,32 @@ your choosing, and all your other Kodi installations can install this add-on as
 "Slaves" that will download and update the settings for all other add-ons to
 match those the Master has shared, every time Kodi starts.
 
-More information can be found on the
-https://github.com/RogueScholar/service.addonsync/wiki[GitHub wiki].
+More information can be found on the {url-githubwiki}[GitHub wiki].
+
+[colophon]
+== Colophon
+
+Document Version: {revnumber}
+
+Last Updated: {revdate}
+
+The terms of the {url-mpl2}[Mozilla Public License 2.0] govern the acceptable
+use of the contents of this repository, unless otherwise specified within a
+specific file. This document (`README.adoc`) is licensed under the terms of the
+{url-ccbysa4}[Creative Commons Attribution 4.0 International License].
+
+[.text-center]
+image::{url-kodilogo}[alt="Kodi logo",width=135,height=135]
+
+=== Legal
+
+.Credits
+[%collapsible]
+====
+[.text-center]
+Maintained by {url-roguescholar}[RogueScholar].
+
+[.text-center]
+Kodi^(R)^ and the {url-kodilogo}[Kodi logo] are registered trademarks of the
+{url-kodifoundation}[Kodi Foundation]
+====
