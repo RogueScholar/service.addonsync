@@ -1,7 +1,13 @@
 # Kodi Media Center language file
+# SPDX-FileCopyrightText: © 2016 Rob Webset
+# SPDX-FileCopyrightText:  2020-2021 Peter J. Mello <admin@petermello.net>
+#
+# SPDX-License-Identifier: MPL-2.0
+#
 # Addon Name: AddonSync
 # Addon id: service.addonsync
 # Addon Provider: RogueScholar
+
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Addons\n"

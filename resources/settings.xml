@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!--
+    SPDX-FileCopyrightText: © 2016-2018 Rob Webset
+    SPDX-FileCopyrightText:  2020-2021 Peter J. Mello <admin@petermello.net>
+
+    SPDX-License-Identifier: MPL-2.0
+-->
 <settings version="1">
   <section id="service.addonsync">
     <category id="general" label="32001" help="">

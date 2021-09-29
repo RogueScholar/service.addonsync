@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+    SPDX-FileCopyrightText: © 2016 Rob Webset
+
+    SPDX-License-Identifier: CC0-1.0
+-->
 <?eclipse-pydev version="1.0"?>
 <pydev_project>
   <pydev_property name="org.python.pydev.PYTHON_PROJECT_INTERPRETER">Default</pydev_property>

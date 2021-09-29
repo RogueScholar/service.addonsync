@@ -1,111 +1,123 @@
 # -*- coding: utf-8 -*-
-import sys
+# SPDX-FileCopyrightText: © 2016 Rob Webset
+# SPDX-FileCopyrightText:  2020-2021 Peter J. Mello <admin@petermello.net>
+#
+# SPDX-License-Identifier: MPL-2.0
+
+import json
 import xbmc
 import xbmcaddon
 import xbmcgui
-
-if sys.version_info >= (2, 7):
-    import json
-else:
-    import simplejson as json
 
 # Import the common settings
 from resources.lib.settings import log
 from resources.lib.settings import Settings
 
-ADDON = xbmcaddon.Addon(id='service.addonsync')
+ADDON = xbmcaddon.Addon(id="service.addonsync")
 
-
-#########################
-# Main
-#########################
-if __name__ == '__main__':
-    log("AddonFilter: Include / Exclude Filter (version %s)" % ADDON.getAddonInfo('version'))
+if __name__ == "__main__":
+    log(f"AddonFilter: Include / Exclude Filter "
+        f"(version {ADDON.getAddonInfo('version')})")
 
     # Get the type of filter that is being applied
-    filterType = Settings.getFilterType()
+    FILTER_TYPE = Settings.getFilterType()
 
-    if filterType == Settings.FILTER_ALL:
+    if FILTER_TYPE == Settings.FILTER_ALL:
         log("AddonFilter: Filter called when there is no filter required")
     else:
         # Make the call to find out all the addons that are installed
-        json_query = xbmc.executeJSONRPC('{"jsonrpc": "2.0", "method": "Addons.GetAddons", "params": { "enabled": true, "properties": ["name", "broken"] }, "id": 1}')
-        json_response = json.loads(json_query)
+        JSON_QUERY = xbmc.executeJSONRPC(
+            '{"jsonrpc": "2.0", "method": "Addons.GetAddons", "params": { "enabled": true, "properties": ["name", "broken"] }, "id": 1}'
+        )
+        json_response = json.loads(JSON_QUERY)
 
         addons = {}
 
-        if ("result" in json_response) and ('addons' in json_response['result']):
+        if ("result" in json_response) and ("addons"
+                                            in json_response["result"]):
             # Check each of the screensavers that are installed on the system
-            for addonItem in json_response['result']['addons']:
-                addonName = addonItem['addonid']
-                # Need to skip the 2 build in screensavers are they can not be triggered
-                # and are a bit dull, so should not be in the mix
-                if addonName in ['screensaver.xbmc.builtin.black', 'screensaver.xbmc.builtin.dim', 'service.xbmc.versioncheck']:
-                    log("AddonFilter: Skipping built-in addons: %s" % addonName)
+            for addon_item in json_response["result"]["addons"]:
+                addon_name = addon_item["addonid"]
+                # Need to skip both built-in screensavers as they cannot be
+                # triggered and are a bit dull, so shouldn't be in the mix
+                if addon_name in [
+                    "screensaver.xbmc.builtin.black",
+                    "screensaver.xbmc.builtin.dim",
+                    "service.xbmc.versioncheck",
+                ]:
+                    log(f"AddonFilter: Skipping built-in addons: {addon_name}")
                     continue
 
-                if addonName.startswith('metadata'):
-                    log("AddonFilter: Skipping metadata addon: %s" % addonName)
+                if addon_name.startswith("metadata"):
+                    log(f"AddonFilter: Skipping metadata addon: {addon_name}")
                     continue
-                if addonName.startswith('resource.language'):
-                    log("AddonFilter: Skipping resource.language addon: %s" % addonName)
+                if addon_name.startswith("resource.language"):
+                    log(f"AddonFilter: Skipping l10n addon: {addon_name}")
                     continue
-                if addonName.startswith('repository'):
-                    log("AddonData: Skipping repository addon: %s" % addonName)
+                if addon_name.startswith("repository"):
+                    log(f"AddonData: Skipping repository addon: {addon_name}")
                     continue
-                if addonName.startswith('skin'):
-                    log("AddonData: Skipping skin addon: %s" % addonName)
-                    continue
-
-                # Skip ourselves as we don't want to update a slave with a master
-                if addonName in ['service.addonsync']:
-                    log("AddonFilter: Detected ourself: %s" % addonName)
+                if addon_name.startswith("skin"):
+                    log(f"AddonData: Skipping skin addon: {addon_name}")
                     continue
 
-                # Need to ensure we skip any addons that are flagged as broken
-                if addonItem['broken']:
-                    log("AddonFilter: Skipping broken addon: %s" % addonName)
+                # Skip ourself as we don't want to flip a slave into a master
+                if addon_name in ["service.addonsync"]:
+                    log(f"AddonFilter: Detected ourself: {addon_name}")
                     continue
 
-                # Now we are left with only the working addon
-                log("AddonFilter: Detected Addon: %s (%s)" % (addonName, addonItem['name']))
-                addons[addonItem['name']] = addonName
+                # Ensure we skip any add-ons that are flagged as broken
+                if addon_item["broken"]:
+                    log(f"AddonFilter: Skipping broken addon: {addon_name}")
+                    continue
+
+                # Now we are left with only the working add-ons
+                log("AddonFilter: Detected Addon: %s (%s)" %
+                    (addon_name, addon_item["name"]))
+                addons[addon_item["name"]] = addon_name
 
         if len(addons) < 1:
             log("AddonFilter: No Addons installed")
-            xbmcgui.Dialog().ok(ADDON.getLocalizedString(32001), ADDON.getLocalizedString(32011).encode('utf-8'))
+            xbmcgui.Dialog().ok(
+                ADDON.getLocalizedString(32001),
+                ADDON.getLocalizedString(32011).encode("utf-8"),
+            )
         else:
             # Get the names of the addons and order them
-            addonNames = list(addons.keys())
-            addonNames.sort()
-            selection = None
+            ADDON_NAMES = list(addons.keys())
+            ADDON_NAMES.sort()
+            SELECTION = None
             try:
-                selection = xbmcgui.Dialog().multiselect(ADDON.getLocalizedString(32001), addonNames)
+                SELECTION = xbmcgui.Dialog().multiselect(
+                    ADDON.getLocalizedString(32001), ADDON_NAMES)
             except:
-                # Multi select is only available for releases v16 onwards, fall back to single select
-                log("AddonFilter: Multi Select Not Supported, using single select")
-                tempSelection = xbmcgui.Dialog().select(ADDON.getLocalizedString(32001), addonNames)
-                if tempSelection > -1:
-                    selection = []
-                    selection.append(tempSelection)
+                # Multi-select is only available for releases v16 onwards,
+                # fall back to single select
+                log("AddonFilter: Multiselect unsupported, using uniselect")
+                TEMP_SELECTION = xbmcgui.Dialog().select(
+                    ADDON.getLocalizedString(32001), ADDON_NAMES)
+                if TEMP_SELECTION > -1:
+                    SELECTION = []
+                    SELECTION.append(TEMP_SELECTION)
 
             # Check the cancel selection
-            if selection is not None:
+            if SELECTION is not None:
                 # Clear the previously saved values
                 Settings.setExcludedAddons()
                 Settings.setIncludedAddons()
 
-                if len(selection) > 0:
-                    addonList = []
-                    for addonSelection in selection:
-                        addonName = addonNames[addonSelection]
-                        log("AddonFilter: Selected addon %d (%s)" % (addonSelection, addonName))
-                        addonList.append(addons[addonName])
+                if len(SELECTION) > 0:
+                    ADDON_LIST = []
+                    for ADDON_SELECTION in SELECTION:
+                        addon_name = ADDON_NAMES[ADDON_SELECTION]
+                        log("AddonFilter: Selected addon %d (%s)" %
+                            (ADDON_SELECTION, addon_name))
+                        ADDON_LIST.append(addons[addon_name])
 
                     # Make a space separated string from the list
-                    addonSpaceList = ' '.join(addonList)
+                    ADDON_SPACE_LIST = " ".join(ADDON_LIST)
 
-                    if filterType == Settings.FILTER_EXCLUDE:
-                        Settings.setExcludedAddons(addonSpaceList)
+                    if FILTER_TYPE == Settings.FILTER_EXCLUDE:
+                        Settings.setExcludedAddons(ADDON_SPACE_LIST)
                     else:
-                        Settings.setIncludedAddons(addonSpaceList)
+                        Settings.setIncludedAddons(ADDON_SPACE_LIST)

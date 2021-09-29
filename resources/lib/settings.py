@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+# SPDX-FileCopyrightText: © 2016 Rob Webset
+# SPDX-FileCopyrightText:  2020-2021 Peter J. Mello <admin@petermello.net>
+#
+# SPDX-License-Identifier: MPL-2.0
+
 import os
 import xbmc
 import xbmcaddon
