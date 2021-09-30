@@ -20,7 +20,7 @@ if __name__ == "__main__":
     # Check if we should be running sync when the system starts
     if Settings.isRunOnStartup():
         ADDON_SYNC = AddonSync()
-        ADDON_SYNC.startSync()
+        ADDON_SYNC.start_sync()
         del ADDON_SYNC
     else:
         log("AddonSync: Not running at startup")

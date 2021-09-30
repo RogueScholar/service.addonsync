@@ -14,9 +14,7 @@
     <import addon="script.module.simplejson" version="3.17.0" />
   </requires>
   <extension point="xbmc.service" library="service.py" />
-  <extension point="xbmc.python.script" library="default.py">
-    <provides>executable</provides>
-  </extension>
+  <extension point="xbmc.python.script" library="default.py" />
   <extension point="xbmc.addon.metadata">
     <summary lang="en_US">Synchronize addon settings across installations</summary>
     <description lang="en_US">Maintain uniform addon settings across all of your installations</description>

@@ -20,7 +20,8 @@ import xbmcvfs
 
 from .settings import log, nestedCopy, nestedDelete, os_path_join, Settings
 
-ADDON = xbmcaddon.Addon("service.addonsync")
+ID = "service.addonsync"
+ADDON = xbmcaddon.Addon(ID)
 ICON = ADDON.getAddonInfo("icon")
 
 
@@ -53,7 +54,7 @@ class Hash:
             return None
 
         hashvalues = []
-        for root, files in os.walk(dirname, topdown=True):
+        for root, _, files in os.walk(dirname, topdown=True):
             if not re.search(r"/\.", root):
                 hashvalues.extend([
                     self._filehash(os.path.join(root, f), hash_func)
@@ -67,9 +68,9 @@ class Hash:
         hasher = hashfunc()
         blocksize = 64 * 1024
         try:
-            with open(filepath, "rb") as fp:
+            with open(filepath, "rb") as file_pth:
                 while True:
-                    data = fp.read(blocksize)
+                    data = file_pth.read(blocksize)
                     if not data:
                         break
                     hasher.update(data)
@@ -197,7 +198,7 @@ class AddonData:
                     continue
 
                 # Skip ourselves so we don't update a slave with a master
-                if addon_name in ["service.addonsync"]:
+                if addon_name in [ID]:
                     log(f"AddonData: Detected ourself: {addon_name}")
                     continue
 
@@ -396,7 +397,7 @@ class AddonData:
         # user has that option enabled
         restart_addons = []
         if Settings.isRestartUpdatedServiceAddons():
-            restart_addons = self._getServiceAddons()
+            restart_addons = self._get_service_addons()
 
         for addon_name in list(local_addon_details.keys()):
             # Check if this addon already exists on the source location
@@ -406,44 +407,44 @@ class AddonData:
 
             # Only copy the items with different hash values
             addon_detail = local_addon_details[addon_name]
-            backedUpDetails = stored_hashsums[addon_name]
-            if addon_detail["hash"] == backedUpDetails["hash"]:
+            backed_up_details = stored_hashsums[addon_name]
+            if addon_detail["hash"] == backed_up_details["hash"]:
                 log("AddonSync: Backup for addon %s already has matching hash %s"
                     % (addon_name, addon_detail["hash"]))
                 continue
 
             # Make sure the version number is the same
             if Settings.isForceVersionMatch(
-            ) and addon_detail["version"] != backedUpDetails["version"]:
+            ) and addon_detail["version"] != backed_up_details["version"]:
                 log("AddonSync: Version numbers of addon %s are different (%s, %s)"
                     % (
                         addon_name,
                         addon_detail["version"],
-                        backedUpDetails["version"],
+                        backed_up_details["version"],
                     ))
                 continue
 
             log(f"AddonSync: Performing copy for {addon_name}")
 
             # Perform the copy of the addons settings
-            sourceDir = f"{source_location}{addon_name}/"
+            source_dir = f"{source_location}{addon_name}/"
 
             # Start by removing the existing version
             try:
-                nestedCopy(sourceDir, addon_detail["dir"])
+                nestedCopy(source_dir, addon_detail["dir"])
             except OSError:
                 log(
                     "AddonSync: Failed to copy from %s to %s" %
-                    (sourceDir, addon_detail["dir"]),
+                    (source_dir, addon_detail["dir"]),
                     xbmc.LOGERROR,
                 )
                 log(f"AddonSync: {traceback.format_exc()}", xbmc.LOGERROR)
 
             # Check if we need to restart the addon.
             if addon_name in restart_addons:
-                self._restartAddon(addon_name)
+                self._restart_addon(addon_name)
 
-    def _getServiceAddons(self):
+    def _get_service_addons(self):
         # Make the call to find out all the service addons that are installed
         json_query = xbmc.executeJSONRPC(
             '{"jsonrpc": "2.0", "method": "Addons.GetAddons", "params": { "type": "xbmc.service", "enabled": true, "properties": ["broken"] }, "id": 1}'
@@ -451,7 +452,7 @@ class AddonData:
 
         json_response = json.loads(json_query)
 
-        serviceAddons = []
+        service_addons = []
 
         if ("result" in json_response) and ("addons"
                                             in json_response["result"]):
@@ -460,7 +461,7 @@ class AddonData:
                 addon_name = addon_item["addonid"]
 
                 # Skip ourselves
-                if addon_name in ["service.addonsync"]:
+                if addon_name in [ID]:
                     log(f"AddonSync: Detected ourself: {addon_name}")
                     continue
 
@@ -471,11 +472,11 @@ class AddonData:
 
                 # Now we are left with only the addon screensavers
                 log(f"AddonSync: Detected Service Addon: {addon_name}")
-                serviceAddons.append(addon_name)
+                service_addons.append(addon_name)
 
-        return serviceAddons
+        return service_addons
 
-    def _restartAddon(self, addon_name):
+    def _restart_addon(self, addon_name):
         log(f"AddonSync: Restarting addon {addon_name}")
 
         # To restart the addon, first disable it, then enable it
@@ -485,12 +486,12 @@ class AddonData:
 
         # Wait until the operation has completed (wait at most 10 seconds)
         monitor = xbmc.Monitor()
-        maxWaitTime = 10
-        while maxWaitTime > 0:
-            maxWaitTime = maxWaitTime - 1
+        max_wait_time = 10
+        while max_wait_time > 0:
+            max_wait_time = max_wait_time - 1
             if monitor.waitForAbort(1):
                 # Abort was requested while waiting
-                maxWaitTime = 0
+                max_wait_time = 0
                 break
 
             # Get the current state of the addon
@@ -504,11 +505,11 @@ class AddonData:
             if ("result" in json_response) and ("addon"
                                                 in json_response["result"]):
                 addon_detail = json_response["result"]["addon"]
-                isEnabled = addon_detail["enabled"]
+                is_enabled = addon_detail["enabled"]
 
-                if not isEnabled:
+                if not is_enabled:
                     log(f"AddonSync: {addon_name} stopped, ready to restart")
-                    maxWaitTime = 0
+                    max_wait_time = 0
                     break
 
         # Now enable the addon
@@ -522,7 +523,8 @@ class AddonSync:
     """Main class to perform the sync."""
 
     @staticmethod
-    def startSync():
+    def start_sync():
+        """Perform main add-on function, commit data to/from central store."""
         log("AddonSync: Sync Started")
 
         # On the first use we need to inform the user what the addon does
@@ -546,7 +548,7 @@ class AddonSync:
             monitor = xbmc.Monitor()
 
             # Check how often we need to check to sync up the settings
-            checkInterval = Settings.getCheckInterval()
+            check_interval = Settings.getCheckInterval()
 
             while not monitor.abortRequested():
                 # Check if we are behaving like a master or slave
@@ -560,11 +562,11 @@ class AddonSync:
                     addon_data.copy_to_slave(central_store_location)
 
                 # Check for the case where we only want to check on startup
-                if checkInterval < 1:
+                if check_interval < 1:
                     break
 
                 # Sleep/wait for abort for the correct interval
-                if monitor.waitForAbort(checkInterval * 60 * 60):
+                if monitor.waitForAbort(check_interval * 60 * 60):
                     # Abort was requested while waiting
                     break
 

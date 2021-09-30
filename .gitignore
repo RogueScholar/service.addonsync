@@ -6,3 +6,4 @@
 **/.mypy_cache
 .idea/
 .settings/
+*.code-workspace

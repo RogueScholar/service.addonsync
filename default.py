@@ -32,7 +32,7 @@ if __name__ == "__main__":
 
     addonSync = AddonSync()
 
-    completed = addonSync.startSync()
+    completed = addonSync.start_sync()
 
     # Only show the complete message if we have not shown an error
     if completed:
