@@ -1,5 +1,3 @@
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync?ref=badge_shield)
-
 = AddonSync
 RogueScholar <RogueScholar@users.noreply.github.com>
 
@@ -19,7 +17,9 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 :revdate: 2021-09-28
 :revnumber: 1.0.2
 // Refs:
+:url-fossabadge: https://app.fossa.com/api/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync.svg?type=shield
 :url-githubwiki: https://github.com/RogueScholar/service.addonsync/wiki
+:url-fossawidget: https://app.fossa.com/api/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync.svg?type=large
 :url-mpl2: https://mozilla.org/MPL/2.0/
 :url-ccbysa4: https://creativecommons.org/licenses/by/4.0/
 :url-roguescholar: https://github.com/RogueScholar
@@ -28,8 +28,11 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 [.right.text-center]
 image::icon.png[alt="AddonSync logo",width=256,height=256,link=https://kodi.wiki/view/Add-on:AddonSync]
 
-[.center.text-left]
+[.right.text-center]
 image::REUSE-compliant.svg[alt="REUSE badge",link=https://api.reuse.software/info/github.com/RogueScholar/service.addonsync]
+
+[.right.text-center]
+image::{url-fossabadge}[alt="FOSSA Status Badge",width=132,height=20,link=https://app.fossa.com/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync?ref=badge_shield]
 
 == Purpose
 
@@ -46,6 +49,9 @@ match those the Master has shared, every time Kodi starts.
 
 More information can be found on the {url-githubwiki}[GitHub wiki].
 
+== FOSSA
+image::{url-fossawidget}[alt="FOSSA Status Widget",link=https://app.fossa.com/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync?ref=badge_large]
+
 [colophon]
 == Colophon
 
@@ -61,8 +67,6 @@ specific file. This document (`README.adoc`) is licensed under the terms of the
 [.text-center]
 image::Kodi-logo.png[alt="Kodi logo",width=84,height=124,link=https://kodi.tv/]
 
-=== Legal
-
 .Credits
 [%collapsible]
 ====
@@ -73,7 +77,3 @@ Maintained by {url-roguescholar}[RogueScholar].
 Kodi^(R)^ and the Kodi logo are registered trademarks of the
 {url-kodifoundation}[Kodi Foundation]
 ====
-
-
-## License
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync?ref=badge_large)
