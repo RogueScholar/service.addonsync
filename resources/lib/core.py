@@ -11,7 +11,8 @@ import json
 import os
 import re
 import traceback
-import defusedxml.ElementTree as ElemenTree
+import xml.etree.ElementTree as ElemenTree  # nosec
+from defusedxml import defuse_stdlib
 
 import xbmc
 import xbmcaddon
@@ -245,6 +246,8 @@ class AddonData:
 
         hash_file = os_path_join(central_store_location, "hashdata.xml")
 
+        defuse_stdlib()
+
         # <addonsync>
         #  <addon name='service.addonsync' version ='1.0.0'>hash_value</addon>
         # </addonsync>
@@ -294,6 +297,8 @@ class AddonData:
         if not xbmcvfs.exists(hash_file):
             log(f"AddonData: Unable to load non-existent file {hash_file}")
             return addon_list
+
+        defuse_stdlib()
 
         try:
             record_file = xbmcvfs.File(hash_file, "r")
