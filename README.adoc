@@ -5,7 +5,7 @@ v101.0.2, 2021-10-05: For Kodi v19 "Matrix" and above
 :keywords: Kodi, add-on, service, settings, synchronization
 :imagesdir: https://raw.githubusercontent.com/RogueScholar/service.addonsync/main/resources
 :sectanchors:
-:toc: auto
+:toc: preamble
 :toclevels: 1
 
 ////
@@ -14,8 +14,10 @@ SPDX-License-Identifier: CC0-1.0
 ////
 
 // Refs:
-:file-readme: link:README.adoc
 :url-fossabadge: https://app.fossa.com/api/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync.svg?type=small
+:url-shieldssize: https://img.shields.io/github/languages/code-size/RogueScholar/service.addonsync?color=f5f085&label=add-on%20size&logo=kodi
+:url-shieldscommit: https://img.shields.io/github/last-commit/RogueScholar/service.addonsync?logo=git
+:url-shieldspgp: https://img.shields.io/keybase/pgp/rscholar?color=seagreen&logo=keybase&logoColor=darkgoldenrod
 :url-kodiservao: https://kodi.wiki/view/Service_add-ons
 :url-githubwiki: https://github.com/RogueScholar/service.addonsync/wiki
 :url-fossawidget: https://app.fossa.com/api/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync.svg?type=large
@@ -24,12 +26,31 @@ SPDX-License-Identifier: CC0-1.0
 :url-roguescholar: https://github.com/RogueScholar
 :url-kodifoundation: http://kodi.tv/about/foundation
 
-image:REUSE-compliant.svg[alt="REUSE badge",float="left",width=110,height=20,link=https://api.reuse.software/info/github.com/RogueScholar/service.addonsync]
-image:{url-fossabadge}[alt="FOSSA Status Badge",float="left",width=132,height=20,link=https://app.fossa.com/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync?ref=badge_small] +
+[.float-group]
+--
+[.left]
+image:{url-shieldssize}[alt="GitHub code size in bytes",width=143,height=20]&nbsp;&nbsp;&nbsp;
+
+[.left]
+image:{url-shieldscommit}[alt="Last Git commit date",width=133,height=20,link=https://github.com/RogueScholar/service.addonsync/commits/main]&nbsp;&nbsp;&nbsp;
+
+[.left]
+image:{url-shieldspgp}[alt="Keybase PGP Fingerprint",width=173,height=20,link=https://keybase.io/rscholar/pgp_keys.asc?fingerprint=dd3f5dec271faa1d2f1182d1ac77588d3f3bca1e]&nbsp;&nbsp;&nbsp;
+
+[.left]
+image:REUSE-compliant.svg[alt="REUSE badge",width=110,height=20,link=https://api.reuse.software/info/github.com/RogueScholar/service.addonsync]&nbsp;&nbsp;&nbsp;
+
+[.left]
+image:{url-fossabadge}[alt="FOSSA Status Badge",width=132,height=20,link=https://app.fossa.com/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync?ref=badge_small]
+--
+
+[discrete]
+==== _{revremark}_
 
 == Purpose
 
-image::icon.png[alt="AddonSync logo",float="right",width=256,height=256,link=https://kodi.wiki/view/Add-on:AddonSync]
+[.right.text-center]
+image::icon.png[alt="AddonSync logo",width=256,height=256,link=https://kodi.wiki/view/Add-on:AddonSync]
 
 [.lead]
 There have been several requests over the years for Kodi add-ons to be able to
@@ -44,7 +65,7 @@ match those the Master has shared, every time Kodi starts.
 
 More information can be found on the {url-githubwiki}[GitHub wiki].
 
-== FOSSA
+== FOSSA Analysis
 image::{url-fossawidget}[alt="FOSSA Status Widget",link=https://app.fossa.com/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync?ref=badge_large]
 
 [colophon]
@@ -52,7 +73,7 @@ image::{url-fossawidget}[alt="FOSSA Status Widget",link=https://app.fossa.com/pr
 
 The terms of the {url-mpl2}[Mozilla Public License 2.0] govern the acceptable
 use of the contents of this repository, unless otherwise specified within a
-specific file. This document ({file-readme}[`README.adoc`]) is released under
+specific file. This document (link:README.adoc[`README.adoc`]) is released under
 the terms of the {url-cczero1}[Creative Commons Public Domain Dedication 1.0].
 
 [.text-center]
@@ -67,6 +88,5 @@ Kodi^(R)^ and the Kodi logo are registered trademarks of the
 {url-kodifoundation}[Kodi Foundation]
 ====
 
-Document Version: {revnumber}
-
-Last Updated: {revdate}
+Document Version: {revnumber} +
+Last Updated: {docdatetime}
