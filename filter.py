@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText:  2020-2021 Peter J. Mello <admin@petermello.net>
 #
 # SPDX-License-Identifier: MPL-2.0
+"""Apply include/exclude filters for installed add-ons if so configured."""
 
 import json
 import xbmc
@@ -20,7 +21,7 @@ if __name__ == "__main__":
         f"(version {ADDON.getAddonInfo('version')})")
 
     # Get the type of filter that is being applied
-    FILTER_TYPE = Settings.getFilterType()
+    FILTER_TYPE = Settings.get_filter_type()
 
     if FILTER_TYPE == Settings.FILTER_ALL:
         log("AddonFilter: Filter called when there is no filter required")
@@ -33,8 +34,8 @@ if __name__ == "__main__":
 
         addons = {}
 
-        if ("result" in json_response) and ("addons"
-                                            in json_response["result"]):
+        if ("result" in json_response) and (
+                "addons" in json_response["result"]):
             # Check each of the screensavers that are installed on the system
             for addon_item in json_response["result"]["addons"]:
                 addon_name = addon_item["addonid"]
@@ -90,7 +91,7 @@ if __name__ == "__main__":
             try:
                 SELECTION = xbmcgui.Dialog().multiselect(
                     ADDON.getLocalizedString(32001), ADDON_NAMES)
-            except:
+            except (ReferenceError, RuntimeError, TypeError):
                 # Multi-select is only available for releases v16 onwards,
                 # fall back to single select
                 log("AddonFilter: Multiselect unsupported, using uniselect")
@@ -103,8 +104,8 @@ if __name__ == "__main__":
             # Check the cancel selection
             if SELECTION is not None:
                 # Clear the previously saved values
-                Settings.setExcludedAddons()
-                Settings.setIncludedAddons()
+                Settings.set_excluded_addons()
+                Settings.set_included_addons()
 
                 if len(SELECTION) > 0:
                     ADDON_LIST = []
@@ -118,6 +119,6 @@ if __name__ == "__main__":
                     ADDON_SPACE_LIST = " ".join(ADDON_LIST)
 
                     if FILTER_TYPE == Settings.FILTER_EXCLUDE:
-                        Settings.setExcludedAddons(ADDON_SPACE_LIST)
+                        Settings.set_excluded_addons(ADDON_SPACE_LIST)
                     else:
-                        Settings.setIncludedAddons(ADDON_SPACE_LIST)
+                        Settings.set_included_addons(ADDON_SPACE_LIST)

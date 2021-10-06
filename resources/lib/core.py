@@ -19,7 +19,7 @@ import xbmcaddon
 import xbmcgui
 import xbmcvfs
 
-from .settings import log, nestedCopy, nestedDelete, os_path_join, Settings
+from .settings import log, nested_copy, nested_delete, os_path_join, Settings
 
 ID = "service.addonsync"
 ADDON = xbmcaddon.Addon(ID)
@@ -75,7 +75,7 @@ class Hash:
                     if not data:
                         break
                     hasher.update(data)
-        except BaseException:
+        except (OSError, ValueError):
             log(f"Hash: Failed to create hash for {filepath}", xbmc.LOGERROR)
         return hasher.hexdigest()
 
@@ -129,11 +129,11 @@ class AddonData:
     def _filter_addons(self, installed_addons):
         filtered_addons = {}
         # Find out what the setting for filtering is
-        filter_type = Settings.getFilterType()
+        filter_type = Settings.get_filter_type()
 
         if filter_type == Settings.FILTER_INCLUDE:
             # Add the included addons as they are just the id's split by spaces
-            include_value = Settings.getIncludedAddons()
+            include_value = Settings.get_included_addons()
             log(f"AddonData: Include filter is {include_value}")
             if include_value not in [None, ""]:
                 for incval in include_value.split(" "):
@@ -141,7 +141,7 @@ class AddonData:
                     if incval in list(installed_addons.keys()):
                         filtered_addons[incval] = installed_addons[incval]
         elif filter_type == Settings.FILTER_EXCLUDE:
-            exclude_value = Settings.getExcludedAddons()
+            exclude_value = Settings.get_excluded_addons()
             log(f"AddonData: Exclude filter is {exclude_value}")
             if exclude_value not in [None, ""]:
                 excluded_addons = exclude_value.split(" ")
@@ -164,7 +164,7 @@ class AddonData:
     def _get_installed_addons(self):
         # Make the call to find out all the addons that are installed
         json_query = xbmc.executeJSONRPC(
-            '{ "jsonrpc": "2.0", "method": "Addons.GetAddons", "params": { "enabled": true, "properties": ["version", "broken"] }, "id": 1 }'
+            '{ "jsonrpc": "2.0", "method": "Addons.GetAddons", "params": {"enabled": true, "properties": [ "broken", "version" ] }, "id": 1 }'
         )
         json_response = json.loads(json_query)
 
@@ -273,7 +273,7 @@ class AddonData:
             try:
                 file_content = ElemenTree.tostring(root, encoding="UTF-8")
                 record_file.write(file_content)
-            except BaseException:
+            except (ElemenTree.ParseError, OSError, ValueError):
                 log(
                     f"AddonData: Failed to write file: {record_file}",
                     xbmc.LOGERROR,
@@ -281,7 +281,7 @@ class AddonData:
                 log(f"AddonData: {traceback.format_exc()}", xbmc.LOGERROR)
             record_file.close()
 
-        except BaseException:
+        except (ElemenTree.ParseError, ValueError):
             log(
                 f"AddonData: Failed to create {traceback.format_exc()}",
                 xbmc.LOGERROR,
@@ -321,7 +321,7 @@ class AddonData:
                     hash_details["hash"],
                 ))
                 addon_list[addon_name] = hash_details
-        except BaseException:
+        except (ElemenTree.ParseError, OSError, ValueError):
             log(f"AddonData: Failed to read in file {hash_file}",
                 xbmc.LOGERROR)
             log(f"AddonData: {traceback.format_exc()}", xbmc.LOGERROR)
@@ -370,13 +370,13 @@ class AddonData:
 
             # Start by removing the existing version
             try:
-                nestedDelete(target_dir)
+                nested_delete(target_dir)
             except OSError:
                 log(f"AddonSync: Failed to delete {target_dir}", xbmc.LOGERROR)
                 log(f"AddonSync: {traceback.format_exc()}", xbmc.LOGERROR)
 
             try:
-                nestedCopy(addon_detail["dir"], target_dir)
+                nested_copy(addon_detail["dir"], target_dir)
             except OSError:
                 log(
                     "AddonSync: Failed to copy from %s to %s" %
@@ -401,7 +401,7 @@ class AddonData:
         # Get the set of service addons, we will need to restart them if the
         # user has that option enabled
         restart_addons = []
-        if Settings.isRestartUpdatedServiceAddons():
+        if Settings.is_restart_synced_services():
             restart_addons = self._get_service_addons()
 
         for addon_name in list(local_addon_details.keys()):
@@ -419,7 +419,7 @@ class AddonData:
                 continue
 
             # Make sure the version number is the same
-            if Settings.isForceVersionMatch(
+            if Settings.is_force_version_match(
             ) and addon_detail["version"] != backed_up_details["version"]:
                 log("AddonSync: Version numbers of addon %s are different (%s, %s)"
                     % (
@@ -436,7 +436,7 @@ class AddonData:
 
             # Start by removing the existing version
             try:
-                nestedCopy(source_dir, addon_detail["dir"])
+                nested_copy(source_dir, addon_detail["dir"])
             except OSError:
                 log(
                     "AddonSync: Failed to copy from %s to %s" %
@@ -533,18 +533,18 @@ class AddonSync:
         log("AddonSync: Sync Started")
 
         # On the first use we need to inform the user what the addon does
-        if Settings.isFirstUse():
+        if Settings.is_first_use():
             xbmcgui.Dialog().ok(
                 ADDON.getLocalizedString(32001),
                 ADDON.getLocalizedString(32005).encode("utf-8"),
             )
-            Settings.setFirstUse()
+            Settings.set_first_use()
 
             # On first use we open the settings so the user can configure them
             ADDON.openSettings()
 
         # Get the location that the addons are to be synced with
-        central_store_location = Settings.getCentralStoreLocation()
+        central_store_location = Settings.get_central_store_loc()
 
         if central_store_location not in [None, ""]:
             log(f"AddonSync: Central store is: {central_store_location}")
@@ -553,11 +553,11 @@ class AddonSync:
             monitor = xbmc.Monitor()
 
             # Check how often we need to check to sync up the settings
-            check_interval = Settings.getCheckInterval()
+            check_interval = Settings.get_sync_interval()
 
             while not monitor.abortRequested():
                 # Check if we are behaving like a master or slave
-                if Settings.isMasterInstallation():
+                if Settings.is_master():
                     # As the master we copy data from the local installation to
                     # a set location
                     addon_data.backup_from_master(central_store_location)

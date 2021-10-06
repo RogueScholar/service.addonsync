@@ -3,9 +3,10 @@
 # SPDX-FileCopyrightText:  2020-2021 Peter J. Mello <admin@petermello.net>
 #
 # SPDX-License-Identifier: MPL-2.0
+"""Invoke AddonSync as a Kodi Program add-on."""
 
-import xbmcgui
 import xbmcaddon
+import xbmcgui
 
 # Import the common settings
 from resources.lib.settings import log
@@ -13,6 +14,7 @@ from resources.lib.core import AddonSync
 
 ADDON = xbmcaddon.Addon(id="service.addonsync")
 ICON = ADDON.getAddonInfo("icon")
+ADDONSYNC = AddonSync()
 
 
 #########################
@@ -30,12 +32,10 @@ if __name__ == "__main__":
         False
     )
 
-    addonSync = AddonSync()
-
-    completed = addonSync.start_sync()
+    COMPLETED = ADDONSYNC.start_sync()
 
     # Only show the complete message if we have not shown an error
-    if completed:
+    if COMPLETED:
         xbmcgui.Dialog().notification(
             ADDON.getLocalizedString(32001).encode('utf-8'),
             ADDON.getLocalizedString(32020).encode('utf-8'),
@@ -44,6 +44,6 @@ if __name__ == "__main__":
             False,
         )
 
-    del addonSync
+    del ADDONSYNC
 
     log("AddonSync: End Manual Running")

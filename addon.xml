@@ -6,8 +6,9 @@
 
     SPDX-License-Identifier: MPL-2.0
 -->
-<addon id="service.addonsync" name="AddonSync" version="101.0.1" provider-name="RogueScholar"
-       xsi:noNamespaceSchemaLocation="https://github.com/xbmc/xbmc/raw/master/addons/xbmc.addon/metadata.xsd">
+<addon id="service.addonsync" name="AddonSync" version="101.0.2"
+    provider-name="RogueScholar"
+    xsi:noNamespaceSchemaLocation="https://github.com/xbmc/xbmc/raw/master/addons/xbmc.addon/metadata.xsd">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
     <import addon="script.module.defusedxml" version="0.6.0" />
@@ -16,9 +17,18 @@
   <extension point="xbmc.service" library="service.py" />
   <extension point="xbmc.python.script" library="default.py" />
   <extension point="xbmc.addon.metadata">
-    <summary lang="en_US">Synchronize addon settings across installations</summary>
-    <description lang="en_US">Maintain uniform addon settings across all of your installations</description>
+    <summary lang="en_US">
+      Synchronize addon settings across installations
+    </summary>
+    <description lang="en_US">
+      Maintain uniform addon settings across all of your installations
+    </description>
     <news>
+      v101.0.2 (2021-10-02)
+      - Wrap executeJSONRPC calls in json.dumps()
+      - Tighten exception handling Classes
+      v101.0.1 (2021-09-28)
+      - Upgrade settings.xml to new format
       v101.0.0 (2021-07-21)
       - Updated AddonSync to function on Kodi 19.0 "Matrix" and above
       v100.3.0 (2019-04-24)
@@ -28,7 +38,7 @@
       v100.1.1 (2016-12-09)
       - Update with support for URepo
       v100.1.0 (2016-11-22)
-      - Add option it ignore addon versions for resync
+      - Add option to ignore addon versions for resync
       v1.0.2 (2016-08-19)
       - Deliver updates through robwebset repository
       v1.0.1 (2016-05-05)

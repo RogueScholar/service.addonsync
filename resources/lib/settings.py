@@ -3,188 +3,208 @@
 # SPDX-FileCopyrightText:  2020-2021 Peter J. Mello <admin@petermello.net>
 #
 # SPDX-License-Identifier: MPL-2.0
+"""Read and store add-on configuration under userdata."""
 
 import os
 import xbmc
 import xbmcaddon
 import xbmcvfs
 
-ADDON = xbmcaddon.Addon(id='service.addonsync')
-ADDON_ID = ADDON.getAddonInfo('id')
+ADDON = xbmcaddon.Addon(id="service.addonsync")
+ADDON_ID = ADDON.getAddonInfo("id")
 
 
-# Common logging module
 def log(txt, loglevel=xbmc.LOGDEBUG):
-    if (ADDON.getSetting("logEnabled") == "true") or (loglevel != xbmc.LOGDEBUG):
+    """Control logging AddonSync messages to the Kodi system log."""
+    if (ADDON.getSetting("logEnabled") == "true") or (
+            loglevel != xbmc.LOGDEBUG):
         if isinstance(txt, str):
             txt = txt.decode("utf-8")
-        message = u'%s: %s' % (ADDON_ID, txt)
+        message = "%s: %s" % (ADDON_ID, txt)
         xbmc.log(msg=message.encode("utf-8"), level=loglevel)
 
 
-# Checks if a directory exists (Do not use for files)
 def dir_exists(dirpath):
-    # There is an issue with password protected smb shares, in that they seem to
-    # always return false for a directory exists call, so if we have a smb with
-    # a password and user name, then we return true
-    if '@' in dirpath:
+    """Check if a directory exists."""
+    # There is an issue with password protected smb shares, in that they seem
+    # to always return false for a directory exists call, so if we have a smb
+    # with a password and user name, then we return true
+    if "@" in dirpath:
         return True
 
-    directoryPath = dirpath
+    dir_path = dirpath
     # The xbmcvfs exists interface require that directories end in a slash
     # It used to be OK not to have the slash in Gotham, but it is now required
-    if (not directoryPath.endswith("/")) and (not directoryPath.endswith("\\")):
-        dirSep = "/"
-        if "\\" in directoryPath:
-            dirSep = "\\"
-        directoryPath = "%s%s" % (directoryPath, dirSep)
-    return xbmcvfs.exists(directoryPath)
+    if (not dir_path.endswith("/")) and (
+            not dir_path.endswith("\\")):
+        dir_sep = "/"
+        if "\\" in dir_path:
+            dir_sep = "\\"
+        dir_path = "%s%s" % (dir_path, dir_sep)
+    return xbmcvfs.exists(dir_path)
 
 
-# There has been problems with calling join with non ascii characters,
-# so we have this method to try and do the conversion for us
-def os_path_join(dir, file):
+def os_path_join(folder, file):
+    """Convert non-ASCII characters in filepaths to Unicode."""
     # Check if it ends in a slash
-    if dir.endswith("/") or dir.endswith("\\"):
+    if folder.endswith("/") or folder.endswith("\\"):
         # Remove the slash character
-        dir = dir[:-1]
+        folder = folder[:-1]
 
     # Convert each argument - if an error, then it will use the default value
     # that was passed in
     try:
-        dir = dir.decode("utf-8")
-    except:
+        folder = folder.decode("utf-8")
+    except (SyntaxError, UnicodeDecodeError):
         pass
     try:
         file = file.decode("utf-8")
-    except:
+    except (SyntaxError, UnicodeDecodeError):
         pass
-    return os.path.join(dir, file)
+    return os.path.join(folder, file)
 
 
-# Performs a nested copy of one directory to another
-def nestedCopy(rootSourceDir, rootTargetDir):
-    log("nestedCopy: Copy %s to %s" % (rootSourceDir, rootTargetDir))
+def nested_copy(root_src_dir, root_target_dir):
+    """Perform a nested (recursive) copy of one directory tree to another."""
+    log("nested_copy: Copy %s to %s" % (root_src_dir, root_target_dir))
 
     # Make sure the target directory exists
-    xbmcvfs.mkdirs(rootTargetDir)
+    xbmcvfs.mkdirs(root_target_dir)
 
-    dirs, files = xbmcvfs.listdir(rootSourceDir)
+    dirs, files = xbmcvfs.listdir(root_src_dir)
 
     for file in files:
         try:
             file = file.decode("utf-8")
-        except:
+        except (SyntaxError, UnicodeDecodeError):
             pass
-        sourceFile = "%s%s" % (rootSourceDir, file)
-        targetFile = "%s%s" % (rootTargetDir, file)
-        log("nestedCopy: Copy file %s to %s" % (sourceFile, targetFile))
-        xbmcvfs.copy(sourceFile, targetFile)
+        src_file = "%s%s" % (root_src_dir, file)
+        target_file = "%s%s" % (root_target_dir, file)
+        log("nested_copy: Copy file %s to %s" % (src_file, target_file))
+        xbmcvfs.copy(src_file, target_file)
 
     for adir in dirs:
         try:
             adir = adir.decode("utf-8")
-        except:
+        except (SyntaxError, UnicodeDecodeError):
             pass
-        sourceDir = "%s%s/" % (rootSourceDir, adir)
-        targetDir = "%s%s/" % (rootTargetDir, adir)
-        log("nestedCopy: Copy directory %s to %s" % (sourceDir, targetDir))
-        nestedCopy(sourceDir, targetDir)
+        src_dir = "%s%s/" % (root_src_dir, adir)
+        target_dir = "%s%s/" % (root_target_dir, adir)
+        log("nested_copy: Copy directory %s to %s" % (src_dir, target_dir))
+        nested_copy(src_dir, target_dir)
 
 
-def nestedDelete(rootDir):
+def nested_delete(root_dir):
+    """Remove a directory recursively if it is no longer needed."""
     # If the file already exists, delete it
-    if dir_exists(rootDir):
+    if dir_exists(root_dir):
         # Remove the png files in the directory first
-        dirs, files = xbmcvfs.listdir(rootDir)
+        dirs, files = xbmcvfs.listdir(root_dir)
         # Remove nested directories first
         for adir in dirs:
-            nestedDelete(os_path_join(rootDir, adir))
+            nested_delete(os_path_join(root_dir, adir))
         # If there are any nested files remove them
-        for aFile in files:
-            xbmcvfs.delete(os_path_join(rootDir, aFile))
+        for a_file in files:
+            xbmcvfs.delete(os_path_join(root_dir, a_file))
         # Now remove the actual directory
-        xbmcvfs.rmdir(rootDir)
+        xbmcvfs.rmdir(root_dir)
     else:
-        log("nestedDelete: Directory %s does not exist" % rootDir)
+        log("nested_delete: Directory %s does not exist" % root_dir)
 
 
 ##############################
 # Stores Various Settings
 ##############################
-class Settings():
+class Settings:
+    """Map names and store config variables from settings.xml to Python."""
+
     FILTER_ALL = 0
     FILTER_INCLUDE = 1
     FILTER_EXCLUDE = 2
 
     @staticmethod
-    def isFirstUse():
-        return ADDON.getSetting("isFirstUse") == 'true'
+    def is_first_use():
+        """Remember if AddonSync has created the central store already."""
+        return ADDON.getSetting("isFirstUse") == "true"
 
     @staticmethod
-    def setFirstUse(useValue='false'):
-        ADDON.setSetting("isFirstUse", useValue)
+    def set_first_use(use_value="false"):
+        """Set to true on installation to trigger central store creation."""
+        ADDON.setSetting("isFirstUse", use_value)
 
     @staticmethod
-    def getCentralStoreLocation():
-        centralStoreLocation = ADDON.getSetting("centralStoreLocation")
+    def get_central_store_loc():
+        """Read filepath of the central store."""
+        central_store_loc = ADDON.getSetting("centralStoreLocation")
         # Make sure the location ends with a slash
-        if ('/' in centralStoreLocation) and (not centralStoreLocation.endswith('/')):
-            centralStoreLocation = "%s/" % centralStoreLocation
-        elif ('\\' in centralStoreLocation) and (not centralStoreLocation.endswith('\\')):
-            centralStoreLocation = "%s\\" % centralStoreLocation
-        return centralStoreLocation
+        if ("/" in central_store_loc) and (
+                not central_store_loc.endswith("/")):
+            central_store_loc = "%s/" % central_store_loc
+        elif ("\\" in central_store_loc) and (
+                not central_store_loc.endswith("\\")):
+            central_store_loc = "%s\\" % central_store_loc
+        return central_store_loc
 
     @staticmethod
-    def isMasterInstallation():
+    def is_master():
+        """Check whether we are running as a Master or Slave instance."""
         # Safer to check for slave type, as master will not overwrite
         if int(ADDON.getSetting("installationType")) == 1:
             return False
         return True
 
     @staticmethod
-    def isRunOnStartup():
-        return ADDON.getSetting('runOnStartup') == 'true'
+    def is_run_at_launch():
+        """Check for 'service' config (run whenever Kodi is launched)."""
+        return ADDON.getSetting('runOnStartup') == "true"
 
     @staticmethod
-    def getCheckInterval():
+    def get_sync_interval():
+        """Get the scheduled interval at which to synchronize add-ons."""
         # If we do not want to run on startup, then the interval is
         # just the once
-        if not Settings.isRunOnStartup():
+        if not Settings.is_run_at_launch():
             return 0
-        return int(float(ADDON.getSetting('checkInterval')))
+        return int(float(ADDON.getSetting("checkInterval")))
 
     @staticmethod
-    def isRestartUpdatedServiceAddons():
-        return ADDON.getSetting('restartUpdatedServiceAddons') == 'true'
+    def is_restart_synced_services():
+        """Check if we need to restart service add-ons following syncs."""
+        return ADDON.getSetting("restartUpdatedServiceAddons") == "true"
 
     @staticmethod
-    def isForceVersionMatch():
-        return ADDON.getSetting('forceVersionMatch') == 'true'
+    def is_force_version_match():
+        """Check if we only sync when add-ons have matching versions."""
+        return ADDON.getSetting("forceVersionMatch") == "true"
 
     @staticmethod
-    def getFilterType():
+    def get_filter_type():
+        """Check if filtering is enabled and if it's inclusive or exclusive."""
         index = int(ADDON.getSetting("filterType"))
-        filterType = Settings.FILTER_ALL
+        filter_type = Settings.FILTER_ALL
         if index == 1:
-            filterType = Settings.FILTER_INCLUDE
+            filter_type = Settings.FILTER_INCLUDE
         elif index == 2:
-            filterType = Settings.FILTER_EXCLUDE
+            filter_type = Settings.FILTER_EXCLUDE
 
-        return filterType
-
-    @staticmethod
-    def getExcludedAddons():
-        return ADDON.getSetting('excludedAddons')
+        return filter_type
 
     @staticmethod
-    def getIncludedAddons():
-        return ADDON.getSetting('includedAddons')
+    def get_excluded_addons():
+        """Return id strings of any add-ons to exclude from syncs."""
+        return ADDON.getSetting("excludedAddons")
 
     @staticmethod
-    def setExcludedAddons(value=""):
-        ADDON.setSetting('excludedAddons', value)
+    def get_included_addons():
+        """Get id strings of the only add-ons we are supposed to sync."""
+        return ADDON.getSetting("includedAddons")
 
     @staticmethod
-    def setIncludedAddons(value=""):
-        ADDON.setSetting('includedAddons', value)
+    def set_excluded_addons(value=""):
+        """Write the id strings of excluded add-ons to AddonSync config."""
+        ADDON.setSetting("excludedAddons", value)
+
+    @staticmethod
+    def set_included_addons(value=""):
+        """Write the id strings of the add-ons we restrict syncing to."""
+        ADDON.setSetting("includedAddons", value)

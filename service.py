@@ -4,6 +4,7 @@
 # SPDX-FileCopyrightText:  2020-2021 Peter J. Mello <admin@petermello.net>
 #
 # SPDX-License-Identifier: MPL-2.0
+"""Provide startup service to run at Kodi launch if so configured."""
 
 import xbmcaddon
 
@@ -18,7 +19,7 @@ if __name__ == "__main__":
         ADDON.getAddonInfo('version'))
 
     # Check if we should be running sync when the system starts
-    if Settings.isRunOnStartup():
+    if Settings.is_run_at_launch():
         ADDON_SYNC = AddonSync()
         ADDON_SYNC.start_sync()
         del ADDON_SYNC
