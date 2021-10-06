@@ -6,6 +6,7 @@
 # SPDX-License-Identifier: MPL-2.0
 """Provide startup service to run at Kodi launch if so configured."""
 
+from __future__ import absolute_import
 import xbmcaddon
 
 from resources.lib.settings import log, Settings

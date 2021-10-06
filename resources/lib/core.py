@@ -6,6 +6,7 @@
 
 """This module generates all the hash values for the installed addons."""
 
+from __future__ import absolute_import
 import hashlib
 import json
 import os

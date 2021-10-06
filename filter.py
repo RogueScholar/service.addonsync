@@ -5,6 +5,7 @@
 # SPDX-License-Identifier: MPL-2.0
 """Apply include/exclude filters for installed add-ons if so configured."""
 
+from __future__ import absolute_import
 import json
 import xbmc
 import xbmcaddon

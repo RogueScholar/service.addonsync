@@ -5,6 +5,7 @@
 # SPDX-License-Identifier: MPL-2.0
 """Read and store add-on configuration under userdata."""
 
+from __future__ import absolute_import
 import os
 import xbmc
 import xbmcaddon
@@ -20,7 +21,7 @@ def log(txt, loglevel=xbmc.LOGDEBUG):
             loglevel != xbmc.LOGDEBUG):
         if isinstance(txt, str):
             txt = txt.decode("utf-8")
-        message = "%s: %s" % (ADDON_ID, txt)
+        message = f"{ADDON_ID}: {txt}"
         xbmc.log(msg=message.encode("utf-8"), level=loglevel)
 
 
@@ -45,22 +46,12 @@ def dir_exists(dirpath):
 
 
 def os_path_join(folder, file):
-    """Convert non-ASCII characters in filepaths to Unicode."""
+    """Construct canonical filepaths from directory tree file lists."""
     # Check if it ends in a slash
     if folder.endswith("/") or folder.endswith("\\"):
         # Remove the slash character
         folder = folder[:-1]
 
-    # Convert each argument - if an error, then it will use the default value
-    # that was passed in
-    try:
-        folder = folder.decode("utf-8")
-    except (SyntaxError, UnicodeDecodeError):
-        pass
-    try:
-        file = file.decode("utf-8")
-    except (SyntaxError, UnicodeDecodeError):
-        pass
     return os.path.join(folder, file)
 
 

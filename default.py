@@ -5,6 +5,7 @@
 # SPDX-License-Identifier: MPL-2.0
 """Invoke AddonSync as a Kodi Program add-on."""
 
+from __future__ import absolute_import
 import xbmcaddon
 import xbmcgui
 
