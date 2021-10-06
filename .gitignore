@@ -3,7 +3,8 @@
 #
 # SPDX-License-Identifier: CC0-1.0
 
-**/.mypy_cache
+**/.mypy_cache/
+**/.pytest_cache/
 .idea/
 .settings/
 *.code-workspace

@@ -25,7 +25,7 @@
     </description>
     <news>
       v101.0.2 (2021-10-02)
-      - Wrap executeJSONRPC calls in json.dumps()
+      - Remove deprecated Python 2 syntax elements
       - Tighten exception handling Classes
       v101.0.1 (2021-09-28)
       - Upgrade settings.xml to new format
