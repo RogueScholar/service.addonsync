@@ -27,7 +27,7 @@ if __name__ == "__main__":
     ICON,
     3000,
     False
-  )
+    )
 
   COMPLETED = ADDONSYNC.start_sync()
 
@@ -39,7 +39,7 @@ if __name__ == "__main__":
       ICON,
       3000,
       False,
-    )
+      )
 
     del ADDONSYNC
 

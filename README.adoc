@@ -18,6 +18,7 @@ SPDX-License-Identifier: CC0-1.0
 :url-shieldssize: https://img.shields.io/github/languages/code-size/RogueScholar/service.addonsync?color=f5f085&label=add-on%20size&logo=kodi
 :url-shieldscommit: https://img.shields.io/github/last-commit/RogueScholar/service.addonsync?logo=git
 :url-shieldspgp: https://img.shields.io/keybase/pgp/rscholar?color=seagreen&logo=keybase&logoColor=darkgoldenrod
+:url-shieldspre: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white
 :url-kodiservao: https://kodi.wiki/view/Service_add-ons
 :url-githubwiki: https://github.com/RogueScholar/service.addonsync/wiki
 :url-fossawidget: https://app.fossa.com/api/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync.svg?type=large
@@ -26,31 +27,19 @@ SPDX-License-Identifier: CC0-1.0
 :url-roguescholar: https://github.com/RogueScholar
 :url-kodifoundation: http://kodi.tv/about/foundation
 
-[.float-group]
---
-[.left]
-image:{url-shieldssize}[alt="GitHub code size in bytes",width=143,height=20]&nbsp;&nbsp;&nbsp;
-
-[.left]
-image:{url-shieldscommit}[alt="Last Git commit date",width=133,height=20,link=https://github.com/RogueScholar/service.addonsync/commits/main]&nbsp;&nbsp;&nbsp;
-
-[.left]
-image:{url-shieldspgp}[alt="Keybase PGP Fingerprint",width=173,height=20,link=https://keybase.io/rscholar/pgp_keys.asc?fingerprint=dd3f5dec271faa1d2f1182d1ac77588d3f3bca1e]&nbsp;&nbsp;&nbsp;
-
-[.left]
-image:REUSE-compliant.svg[alt="REUSE badge",width=110,height=20,link=https://api.reuse.software/info/github.com/RogueScholar/service.addonsync]&nbsp;&nbsp;&nbsp;
-
-[.left]
-image:{url-fossabadge}[alt="FOSSA Status Badge",width=132,height=20,link=https://app.fossa.com/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync?ref=badge_small]
---
+image:{url-shieldssize}[alt="GitHub code size in bytes",role="left",width=143,height=20]&nbsp;&nbsp;&nbsp;
+image:{url-shieldscommit}[alt="Last Git commit date",role="left",width=133,height=20,link=https://github.com/RogueScholar/service.addonsync/commits/main]&nbsp;&nbsp;&nbsp;
+image:{url-shieldspgp}[alt="Keybase PGP Fingerprint",role="left",width=173,height=20,link=https://keybase.io/rscholar/pgp_keys.asc?fingerprint=dd3f5dec271faa1d2f1182d1ac77588d3f3bca1e]&nbsp;&nbsp;&nbsp;
+image:REUSE-compliant.svg[alt="REUSE badge",role="left",width=110,height=20,link=https://api.reuse.software/info/github.com/RogueScholar/service.addonsync]&nbsp;&nbsp;&nbsp;
+image:{url-shieldspre}[alt=Pre-Commit Enabled",role="left",link=https://github.com/pre-commit/pre-commit]&nbsp;&nbsp;&nbsp;
+image:{url-fossabadge}[alt="FOSSA Status Badge",role="left",width=132,height=20,link=https://app.fossa.com/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync?ref=badge_small] +
 
 [discrete]
 ==== _{revremark}_
 
 == Purpose
 
-[.right.text-center]
-image::icon.png[alt="AddonSync logo",width=256,height=256,link=https://kodi.wiki/view/Add-on:AddonSync]
+image::icon.png[alt="AddonSync logo",role="right",width=256,height=256,link=https://kodi.wiki/view/Add-on:AddonSync]
 
 [.lead]
 There have been several requests over the years for Kodi add-ons to be able to

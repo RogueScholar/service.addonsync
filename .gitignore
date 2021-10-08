@@ -9,3 +9,4 @@
 .idea/
 .settings/
 *.code-workspace
+*.cuda-proj

@@ -29,8 +29,8 @@ if __name__ == "__main__":
     else:
         # Make the call to find out all the addons that are installed
         JSON_QUERY = xbmc.executeJSONRPC(
-            '{"jsonrpc": "2.0", "method": "Addons.GetAddons", "params": { "enabled": true, "properties": ["name", "broken"] }, "id": 1}'
-        )
+            '{"jsonrpc": "2.0", "method": "Addons.GetAddons", "params": { "enabled": true, "properties": ["name", "broken"] }, "id": 1}'  # noqa
+            )
         json_response = json.loads(JSON_QUERY)
 
         addons = {}
@@ -46,7 +46,7 @@ if __name__ == "__main__":
                     "screensaver.xbmc.builtin.black",
                     "screensaver.xbmc.builtin.dim",
                     "service.xbmc.versioncheck",
-                ]:
+                    ]:
                     log(f"AddonFilter: Skipping built-in addons: {addon_name}")
                     continue
 
@@ -83,7 +83,7 @@ if __name__ == "__main__":
             xbmcgui.Dialog().ok(
                 ADDON.getLocalizedString(32001),
                 ADDON.getLocalizedString(32011).encode("utf-8"),
-            )
+                )
         else:
             # Get the names of the addons and order them
             ADDON_NAMES = list(addons.keys())
