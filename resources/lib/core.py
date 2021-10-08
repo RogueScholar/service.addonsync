@@ -3,7 +3,6 @@
 # SPDX-FileCopyrightText:  2020-2021 Peter J. Mello <admin@petermello.net>
 #
 # SPDX-License-Identifier: MPL-2.0
-
 """This module generates all the hash values for the installed addons."""
 
 from __future__ import annotations, generator_stop
@@ -20,7 +19,7 @@ import xbmcaddon
 import xbmcgui
 import xbmcvfs
 
-from .settings import log, nested_copy, nested_delete, os_path_join, Settings
+from .settings import Settings, log, nested_copy, nested_delete, os_path_join
 
 ID = "service.addonsync"
 ADDON = xbmcaddon.Addon(ID)
@@ -31,11 +30,11 @@ class Hash:
   """Class that will generate hash values for each plugin data section."""
 
   HASH_FUNCS = {
-    "md5": hashlib.md5,
-    "sha1": hashlib.sha1,
-    "sha256": hashlib.sha256,
-    "sha512": hashlib.sha512,
-  }
+      "md5": hashlib.md5,
+      "sha1": hashlib.sha1,
+      "sha256": hashlib.sha256,
+      "sha512": hashlib.sha512,
+      }
 
   def get_dir_hash(self, profile_name, hashfunc="md5", excluded_files=None):
     """Generate a hash for a given directory."""
@@ -59,10 +58,10 @@ class Hash:
     for root, _, files in os.walk(dirname, topdown=True):
       if not re.search(r"/\.", root):
         hashvalues.extend([
-          self._filehash(os.path.join(root, f), hash_func)
-          for f in files if not f.startswith(".")
-          and not re.search(r"/\.", f) and f not in excluded_files
-        ])
+            self._filehash(os.path.join(root, f), hash_func) for f in files
+            if (not f.startswith(".")) and (not re.search(r"/\.", f))
+            and (f not in excluded_files)
+            ])
     return self._reduce_hash(hashvalues, hash_func)
 
   # Generates a hash value for a given file
@@ -90,7 +89,7 @@ class Hash:
 
 
 class AddonData:
-  """Class that provides utility methods to lookup Addon information."""
+  """Class that provides utility methods to lookup add-on information."""
 
   def get_addons_to_sync(self):
     """Get the details of all the addons required for a sync."""
@@ -118,9 +117,11 @@ class AddonData:
         hash_value = hashsum.get_dir_hash(settings_dir)
         del hashsum
 
-        log(f"AddonData: addon: {addon_name} "
+        log(
+            f"AddonData: addon: {addon_name} "
             f"path: {settings_dir} "
-            f"hash: {hash_value}")
+            f"hash: {hash_value}"
+            )
         addon_detail["hash"] = hash_value
         addon_details[addon_name] = addon_detail
         addon_detail["version"] = active_addons[addon_name]
@@ -138,7 +139,7 @@ class AddonData:
       log(f"AddonData: Include filter is {include_value}")
       if include_value not in [None, ""]:
         for incval in include_value.split(" "):
-          # Make sure the addon is still installed
+          # Make sure the add-on is still installed
           if incval in list(installed_addons.keys()):
             filtered_addons[incval] = installed_addons[incval]
     elif filter_type == Settings.FILTER_EXCLUDE:
@@ -148,9 +149,7 @@ class AddonData:
         excluded_addons = exclude_value.split(" ")
         for addon_name in list(installed_addons.keys()):
           if addon_name not in excluded_addons:
-            filtered_addons[addon_name] = installed_addons[
-              addon_name
-            ]
+            filtered_addons[addon_name] = installed_addons[addon_name]
           else:
             log(f"AddonData: Skipping excluded addon {addon_name}")
       else:
@@ -164,9 +163,11 @@ class AddonData:
   # Method to get all the addons that are installed and not marked as broken
   def _get_installed_addons(self):
     # Make the call to find out all the addons that are installed
+    # pylint: disable=line-too-long
     json_query = xbmc.executeJSONRPC(
-      '{"jsonrpc":"2.0","method":"Addons.GetAddons","params":{"enabled":true,"properties":["broken","version"]},"id":1}'
-    )
+        '{"jsonrpc":"2.0","method":"Addons.GetAddons","params":{"enabled":true,"properties":["broken","version"]},"id":1}'  # noqa
+        )
+    # pylint: enable=line-too-long
     json_response = json.loads(json_query)
 
     addons = {}
@@ -177,11 +178,9 @@ class AddonData:
         addon_name = addon_item["addonid"]
         # Need to skip the two built-in screensavers as they can not be
         # triggered and are a bit dull, thus should not be in the mix
-        if addon_name in [
-          "screensaver.xbmc.builtin.black",
-          "screensaver.xbmc.builtin.dim",
-          "service.xbmc.versioncheck",
-        ]:
+        if addon_name in ["screensaver.xbmc.builtin.black",
+                          "screensaver.xbmc.builtin.dim",
+                          "service.xbmc.versioncheck"]:
           log(f"AddonData: Skipping built-in addons: {addon_name}")
           continue
 
@@ -235,8 +234,10 @@ class AddonData:
       config_path = addon_profile
     else:
       # If the path does not exist then we will not need to copy this one
-      log(f"AddonData: addon: {addon_name} "
-          f"path: {config_path} doesn't exist")
+      log(
+          f"AddonData: addon: {addon_name} "
+          f"path: {config_path} doesn't exist"
+          )
       config_path = None
 
     return config_path
@@ -275,17 +276,17 @@ class AddonData:
         record_file.write(file_content)
       except (ElemenTree.ParseError, OSError, ValueError):
         log(
-          f"AddonData: Failed to write file: {record_file}",
-          xbmc.LOGERROR,
-        )
+            f"AddonData: Failed to write file: {record_file}",
+            xbmc.LOGERROR,
+            )
         log(f"AddonData: {traceback.format_exc()}", xbmc.LOGERROR)
       record_file.close()
 
     except (ElemenTree.ParseError, ValueError):
       log(
-        f"AddonData: Failed to create {traceback.format_exc()}",
-        xbmc.LOGERROR,
-      )
+          f"AddonData: Failed to create {traceback.format_exc()}",
+          xbmc.LOGERROR,
+          )
 
   # Reads an existing XML file with Hash values in it
   def _load_hash_record(self, record_location):
@@ -306,8 +307,8 @@ class AddonData:
       record_file.close()
 
       hash_record = ElemenTree.ElementTree(
-        ElemenTree.fromstring(record_file_str)
-      )
+          ElemenTree.fromstring(record_file_str)
+          )
 
       for element_item in hash_record.findall("addon"):
         hash_details = {}
@@ -315,11 +316,12 @@ class AddonData:
         hash_details["name"] = addon_name
         hash_details["version"] = element_item.attrib["version"]
         hash_details["hash"] = element_item.text
-        log("AddonData: Processing entry %s (%s) with hash %s" % (
-          hash_details["name"],
-          hash_details["version"],
-          hash_details["hash"],
-        ))
+        log(
+            "AddonData: Processing entry %s (%s) with hash %s" % (
+                hash_details["name"],
+                hash_details["version"],
+                hash_details["hash"],
+                ))
         addon_list[addon_name] = hash_details
     except (ElemenTree.ParseError, OSError, ValueError):
       log(f"AddonData: Failed to read in file {hash_file}", xbmc.LOGERROR)
@@ -353,12 +355,11 @@ class AddonData:
       # doesn't, then we need to copy it
       if addon_name in list(stored_hashsums.keys()):
         # Only copy the items with different hash values
-        if (
-          addon_detail["hash"]
-          == stored_hashsums[addon_name]["hash"]
-        ):
-          log(f"AddonSync: Backup for addon {addon_name} "
-              "already up to date with hash %s" % addon_detail["hash"])
+        if addon_detail["hash"] == stored_hashsums[addon_name]["hash"]:
+          log(
+              f"AddonSync: Backup for addon {addon_name} "
+              "already up to date with hash %s" % addon_detail["hash"]
+              )
         continue
 
       log(f"AddonSync: Performing copy for {addon_name}")
@@ -377,17 +378,17 @@ class AddonData:
         nested_copy(addon_detail["dir"], target_dir)
       except OSError:
         log(
-          "AddonSync: Failed to copy from %s to %s" %
-          (addon_detail["dir"], target_dir),
-          xbmc.LOGERROR,
-        )
+            "AddonSync: Failed to copy from %s to %s" %
+            (addon_detail["dir"], target_dir),
+            xbmc.LOGERROR,
+            )
         log(f"AddonSync: {traceback.format_exc()}", xbmc.LOGERROR)
 
         # Save the new set of hash values
         self._generate_hash_record(addon_details, target_location)
 
   def copy_to_slave(self, source_location):
-    """Copy configs from the central store to the local installation."""
+    """Copy add-on configs from the central store to the local installation."""
     log(f"AddonSync: Restore from {source_location}")
 
     # Get all the hash values of the local installation
@@ -412,19 +413,21 @@ class AddonData:
       addon_detail = local_addon_details[addon_name]
       backed_up_details = stored_hashsums[addon_name]
       if addon_detail["hash"] == backed_up_details["hash"]:
-        log("AddonSync: Backup for addon %s already has matching hash %s"
-            % (addon_name, addon_detail["hash"]))
+        log(
+            "AddonSync: Backup for addon %s already has matching hash %s" %
+            (addon_name, addon_detail["hash"])
+            )
         continue
 
       # Make sure the version number is the same
       if Settings.is_force_version_match(
-      ) and addon_detail["version"] != backed_up_details["version"]:
-        log("AddonSync: Version numbers of addon %s are different (%s, %s)"
-            % (
-              addon_name,
-              addon_detail["version"],
-              backed_up_details["version"],
-            ))
+          ) and addon_detail["version"] != backed_up_details["version"]:
+        log(
+            "AddonSync: Version numbers of addon %s are different (%s, %s)" % (
+                addon_name,
+                addon_detail["version"],
+                backed_up_details["version"],
+                ))
         continue
 
       log(f"AddonSync: Performing copy for {addon_name}")
@@ -437,10 +440,10 @@ class AddonData:
         nested_copy(source_dir, addon_detail["dir"])
       except OSError:
         log(
-          "AddonSync: Failed to copy from %s to %s" %
-          (source_dir, addon_detail["dir"]),
-          xbmc.LOGERROR,
-        )
+            "AddonSync: Failed to copy from %s to %s" %
+            (source_dir, addon_detail["dir"]),
+            xbmc.LOGERROR,
+            )
         log(f"AddonSync: {traceback.format_exc()}", xbmc.LOGERROR)
 
       # Check if we need to restart the addon.
@@ -449,9 +452,11 @@ class AddonData:
 
   def _get_service_addons(self):
     # Make the call to find out all the service addons that are installed
+    # pylint: disable=line-too-long
     json_query = xbmc.executeJSONRPC(
-      '{"jsonrpc":"2.0","method":"Addons.GetAddons","params":{"type":"xbmc.service","enabled":true,"properties":["broken"]},"id":1}'
-    )
+        '{"jsonrpc":"2.0","method":"Addons.GetAddons","params":{"type":"xbmc.service","enabled":true,"properties":["broken"]},"id":1}'  # noqa
+        )
+    # pylint: enable=line-too-long
 
     json_response = json.loads(json_query)
 
@@ -482,9 +487,12 @@ class AddonData:
     log(f"AddonSync: Restarting addon {addon_name}")
 
     # To restart the addon, first disable it, then enable it
+    # pylint: disable=line-too-long
     xbmc.executeJSONRPC(
-      '{"jsonrpc":"2.0","method":"Addons.SetAddonEnabled","params":{"addonid":"%s","enabled":"toggle"},"id":1}'
-      % addon_name)
+        '{"jsonrpc":"2.0","method":"Addons.SetAddonEnabled","params":{"addonid":"%s","enabled":"toggle"},"id":1}'  # noqa
+        % addon_name
+        )
+    # pylint: enable=line-too-long
 
     # Wait until the operation has completed (wait at most 10 seconds)
     monitor = xbmc.Monitor()
@@ -498,9 +506,12 @@ class AddonData:
 
       # Get the current state of the addon
       log(f"AddonSync: Disabling addon {addon_name}")
+      # pylint: disable=line-too-long
       json_query = xbmc.executeJSONRPC(
-        '{"jsonrpc":"2.0","method":"Addons.GetAddonDetails","params":{"addonid":"%s","properties":["enabled"]},"id":1}'
-        % addon_name)
+          '{"jsonrpc":"2.0","method":"Addons.GetAddonDetails","params":{"addonid":"%s","properties":["enabled"]},"id":1}'  # noqa
+          % addon_name
+          )
+      # pylint: enable=line-too-long
 
       json_response = json.loads(json_query)
 
@@ -515,9 +526,12 @@ class AddonData:
 
     # Now enable the addon
     log(f"AddonSync: Enabling addon {addon_name}")
+    # pylint: disable=line-too-long
     xbmc.executeJSONRPC(
-      '{"jsonrpc":"2.0","method":"Addons.SetAddonEnabled","params":{"addonid":"%s","enabled":"toggle"},"id":1}'
-      % addon_name)
+        '{"jsonrpc":"2.0","method":"Addons.SetAddonEnabled","params":{"addonid":"%s","enabled":"toggle"},"id":1}'  # noqa
+        % addon_name
+        )
+    # pylint: enable=line-too-long
 
 
 class AddonSync:
@@ -531,9 +545,9 @@ class AddonSync:
     # On the first use we need to inform the user what the addon does
     if Settings.is_first_use():
       xbmcgui.Dialog().ok(
-        ADDON.getLocalizedString(32001),
-        ADDON.getLocalizedString(32005).encode("utf-8"),
-      )
+          ADDON.getLocalizedString(32001),
+          ADDON.getLocalizedString(32005).encode("utf-8"),
+          )
       Settings.set_first_use()
 
       # On first use we open the settings so the user can configure them
@@ -576,12 +590,12 @@ class AddonSync:
     else:
       log("AddonSync: Central store not set")
       xbmcgui.Dialog().notification(
-        ADDON.getLocalizedString(32001).encode("utf-8"),
-        ADDON.getLocalizedString(32006).encode("utf-8"),
-        ICON,
-        5000,
-        False,
-      )
+          ADDON.getLocalizedString(32001).encode("utf-8"),
+          ADDON.getLocalizedString(32006).encode("utf-8"),
+          ICON,
+          5000,
+          False,
+          )
       return False
 
     log("AddonSync: Sync Ended")

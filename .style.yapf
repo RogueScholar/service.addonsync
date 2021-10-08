@@ -3,4 +3,15 @@
 # SPDX-License-Identifier: CC0-1.0
 
 [style]
-based_on_style = google
+allow_multiline_dictionary_keys=True
+allow_multiline_lambdas=True
+allow_split_before_default_or_named_assigns=False
+allow_split_before_dict_value=False
+coalesce_brackets=True
+column_limit=80
+dedent_closing_brackets=True
+indent_closing_brackets=True
+indent_dictionary_value=True
+indent_width=2
+space_between_ending_comma_and_closing_bracket=False
+split_before_closing_bracket=False
