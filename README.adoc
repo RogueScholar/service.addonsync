@@ -39,7 +39,7 @@ image:{url-fossabadge}[alt="FOSSA Status Badge",role="left",width=132,height=20,
 
 == Purpose
 
-image::icon.png[alt="AddonSync logo",role="right",width=256,height=256,link=https://kodi.wiki/view/Add-on:AddonSync]
+image::clearlogo.png[alt="AddonSync logo",width=800,height=310,link=https://kodi.wiki/view/Add-on:AddonSync]
 
 [.lead]
 There have been several requests over the years for Kodi add-ons to be able to

@@ -1,14 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!--
-    SPDX-FileCopyrightText: © 2016-2018 Rob Webset
-    SPDX-FileCopyrightText: © 2019 Robert Hudson
-    SPDX-FileCopyrightText:  2020-2021 Peter J. Mello <admin@petermello.net>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><!--
+SPDX-FileCopyrightText: © 2016-2018 Rob Webset
+SPDX-FileCopyrightText: © 2019 Robert Hudson
+SPDX-FileCopyrightText:  2020-2021 Peter J. Mello <admin@petermello.net>
 
-    SPDX-License-Identifier: MPL-2.0
--->
-<addon id="service.addonsync" name="AddonSync" version="101.0.2"
-    provider-name="RogueScholar"
-    xsi:noNamespaceSchemaLocation="https://github.com/xbmc/xbmc/raw/master/addons/xbmc.addon/metadata.xsd">
+SPDX-License-Identifier: MPL-2.0
+--><addon id="service.addonsync" name="AddonSync" version="101.0.2"
+    provider-name="RogueScholar">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
     <import addon="script.module.defusedxml" version="0.6.0" />
@@ -48,19 +45,21 @@
     </news>
     <platform>all</platform>
     <language>en</language>
-		<license>MPL-2.0</license>
-		<forum></forum>
+      <license>MPL-2.0</license>
+      <forum></forum>
     <website>https://github.com/RogueScholar/service.addonsync/wiki</website>
     <source>https://github.com/RogueScholar/service.addonsync</source>
-    <lifecyclestate type="normal" />
+    <lifecyclestate type="normal" lang="en_US">
+      Updated for Matrix
+    </lifecyclestate>
     <assets>
+      <banner>resources/banner.png</banner>
+	  <clearlogo>resources/clearlogo.png</clearlogo>
+      <fanart>resources/fanart.png</fanart>
       <icon>resources/icon.png</icon>
-      <fanart>resources/fanart.jpg</fanart>
-      <screenshot>resources/screenshot-01.jpg</screenshot>
-      <screenshot>resources/screenshot-02.jpg</screenshot>
-      <screenshot>resources/screenshot-03.jpg</screenshot>
-      <banner>resources/banner.jpg</banner>
-      <logo>resources/logo.png</logo>
+      <screenshot>resources/screenshot-01.png</screenshot>
+      <screenshot>resources/screenshot-02.png</screenshot>
+      <screenshot>resources/screenshot-03.png</screenshot>
     </assets>
     <reuselanguageinvoker>true</reuselanguageinvoker>
   </extension>
