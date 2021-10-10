@@ -165,7 +165,7 @@ class AddonData:
     # Make the call to find out all the addons that are installed
     # pylint: disable=line-too-long
     json_query = xbmc.executeJSONRPC(
-        '{"jsonrpc":"2.0","method":"Addons.GetAddons","params":{"enabled":true,"properties":["broken","version"]},"id":1}'  # noqa
+        '{ "jsonrpc": "2.0", "method": "Addons.GetAddons", "params": { "enabled": true, "properties": [ "broken", "version" ] }, "id": 1 }'  # noqa
         )
     # pylint: enable=line-too-long
     json_response = json.loads(json_query)
@@ -321,7 +321,8 @@ class AddonData:
                 hash_details["name"],
                 hash_details["version"],
                 hash_details["hash"],
-                ))
+                )
+            )
         addon_list[addon_name] = hash_details
     except (ElemenTree.ParseError, OSError, ValueError):
       log(f"AddonData: Failed to read in file {hash_file}", xbmc.LOGERROR)
@@ -454,7 +455,7 @@ class AddonData:
     # Make the call to find out all the service addons that are installed
     # pylint: disable=line-too-long
     json_query = xbmc.executeJSONRPC(
-        '{"jsonrpc":"2.0","method":"Addons.GetAddons","params":{"type":"xbmc.service","enabled":true,"properties":["broken"]},"id":1}'  # noqa
+        '{ "jsonrpc": "2.0", "method": "Addons.GetAddons", "params": { "type": "xbmc.service", "enabled": true, "properties": [ "broken" ] }, "id": 1 }'  # noqa
         )
     # pylint: enable=line-too-long
 
@@ -489,7 +490,7 @@ class AddonData:
     # To restart the addon, first disable it, then enable it
     # pylint: disable=line-too-long
     xbmc.executeJSONRPC(
-        '{"jsonrpc":"2.0","method":"Addons.SetAddonEnabled","params":{"addonid":"%s","enabled":"toggle"},"id":1}'  # noqa
+        '{ "jsonrpc": "2.0", "method": "Addons.SetAddonEnabled", "params": { "addonid": "%s", "enabled": "toggle" }, "id": 1 }'  # noqa
         % addon_name
         )
     # pylint: enable=line-too-long
@@ -508,7 +509,7 @@ class AddonData:
       log(f"AddonSync: Disabling addon {addon_name}")
       # pylint: disable=line-too-long
       json_query = xbmc.executeJSONRPC(
-          '{"jsonrpc":"2.0","method":"Addons.GetAddonDetails","params":{"addonid":"%s","properties":["enabled"]},"id":1}'  # noqa
+          '{ "jsonrpc": "2.0", "method": "Addons.GetAddonDetails", "params": { "addonid": "%s", "properties": [ "enabled" ] }, "id": 1 }'  # noqa
           % addon_name
           )
       # pylint: enable=line-too-long
@@ -528,7 +529,7 @@ class AddonData:
     log(f"AddonSync: Enabling addon {addon_name}")
     # pylint: disable=line-too-long
     xbmc.executeJSONRPC(
-        '{"jsonrpc":"2.0","method":"Addons.SetAddonEnabled","params":{"addonid":"%s","enabled":"toggle"},"id":1}'  # noqa
+        '{ "jsonrpc": "2.0", "method": "Addons.SetAddonEnabled", "params": { "addonid": "%s", "enabled": "toggle" }, "id": 1 }'  # noqa
         % addon_name
         )
     # pylint: enable=line-too-long

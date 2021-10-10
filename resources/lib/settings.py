@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8; python-indent-offset: 2; python-guess-indent: nil; -*-
 # SPDX-FileCopyrightText: © 2016 Rob Webset
 # SPDX-FileCopyrightText:  2020-2021 Peter J. Mello <admin@petermello.net>
 #

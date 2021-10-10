@@ -15,7 +15,7 @@ SPDX-License-Identifier: CC0-1.0
 
 // Refs:
 :url-fossabadge: https://app.fossa.com/api/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync.svg?type=small
-:url-shieldssize: https://img.shields.io/github/languages/code-size/RogueScholar/service.addonsync?color=f5f085&label=add-on%20size&logo=kodi
+:url-shieldssize: https://img.shields.io/github/size/RogueScholar/service.addonsync?color=f5f085&label=add-on%20size&logo=kodi
 :url-shieldscommit: https://img.shields.io/github/last-commit/RogueScholar/service.addonsync?logo=git
 :url-shieldspgp: https://img.shields.io/keybase/pgp/rscholar?color=seagreen&logo=keybase&logoColor=darkgoldenrod
 :url-shieldspre: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white
@@ -27,12 +27,12 @@ SPDX-License-Identifier: CC0-1.0
 :url-roguescholar: https://github.com/RogueScholar
 :url-kodifoundation: http://kodi.tv/about/foundation
 
-image:{url-shieldssize}[alt="GitHub code size in bytes",role="left",width=143,height=20]&nbsp;&nbsp;&nbsp;
-image:{url-shieldscommit}[alt="Last Git commit date",role="left",width=133,height=20,link=https://github.com/RogueScholar/service.addonsync/commits/main]&nbsp;&nbsp;&nbsp;
-image:{url-shieldspgp}[alt="Keybase PGP Fingerprint",role="left",width=173,height=20,link=https://keybase.io/rscholar/pgp_keys.asc?fingerprint=dd3f5dec271faa1d2f1182d1ac77588d3f3bca1e]&nbsp;&nbsp;&nbsp;
-image:REUSE-compliant.svg[alt="REUSE badge",role="left",width=110,height=20,link=https://api.reuse.software/info/github.com/RogueScholar/service.addonsync]&nbsp;&nbsp;&nbsp;
-image:{url-shieldspre}[alt=Pre-Commit Enabled",role="left",link=https://github.com/pre-commit/pre-commit]&nbsp;&nbsp;&nbsp;
-image:{url-fossabadge}[alt="FOSSA Status Badge",role="left",width=132,height=20,link=https://app.fossa.com/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync?ref=badge_small] +
+image:{url-shieldssize}[alt="Repository file size in bytes",role="left",height=20,link=]&nbsp;&nbsp;&nbsp;
+image:{url-shieldscommit}[alt="Last Git commit date",role="left",height=20,link=https://github.com/RogueScholar/service.addonsync/commits/main]&nbsp;&nbsp;&nbsp;
+image:{url-shieldspgp}[alt="Keybase PGP Fingerprint",role="left",height=20,link=https://keybase.io/rscholar/pgp_keys.asc?fingerprint=dd3f5dec271faa1d2f1182d1ac77588d3f3bca1e]&nbsp;&nbsp;&nbsp;
+image:REUSE-compliant.svg[alt="REUSE badge",role="left",height=20,link=https://api.reuse.software/info/github.com/RogueScholar/service.addonsync]&nbsp;&nbsp;&nbsp;
+image:{url-shieldspre}[alt=Pre-Commit Enabled",role="left",height=20,link=https://github.com/pre-commit/pre-commit]&nbsp;&nbsp;&nbsp;
+image:{url-fossabadge}[alt="FOSSA Status Badge",role="left",height=20,link=https://app.fossa.com/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync?ref=badge_small] +
 
 [discrete]
 ==== _{revremark}_

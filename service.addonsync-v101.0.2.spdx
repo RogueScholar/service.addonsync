@@ -4,26 +4,26 @@ SPDXVersion: SPDX-2.2
 DataLicense: CC0-1.0
 SPDXID: SPDXRef-DOCUMENT
 DocumentName: service.addonsync-v101.0.2
-DocumentNamespace: http://spdx.org/spdxdocs/-91ecd016-52fe-4d8a-ab83-49f5f6fff974
+DocumentNamespace: http://spdx.org/spdxdocs/-4da511fb-1526-4f4c-8b42-9a7b280bafdb
 LicenseListVersion: 3.14
 
 
 # Creation Info
 
 Creator: Person: Peter J. Mello (admin@petermello.net)
-Created: 2021-10-06T06:24:00Z
+Created: 2021-10-10T00:20:53Z
 
 
 # Package
 
 PackageName: service.addonsync
-SPDXID: SPDXRef-f545c89a-02e8-450b-b58c-855be3ea4afc
+SPDXID: SPDXRef-f545c89a02e8450bb58c855be3ea4afc
 PackageVersion: 101.0.2
 PackageFileName: service.addonsync-101.0.2.zip
 PackageSupplier: Person: RogueScholar ()
 PackageDownloadLocation: https://github.com/RogueScholar/service.addonsync/archive/refs/heads/main.zip
 FilesAnalyzed: false
-PackageVerificationCode: 03b25aab914f5dfc8c9dd850f30bff310eec0fb7
+PackageVerificationCode: 429f8348702c000e9e9a7e856620dae58d6b8e9c
 PackageHomePage: https://kodi.wiki/view/Add-on%3AAddonSync
 PackageLicenseConcluded: MPL-2.0
 PackageLicenseInfoFromFiles: CC0-1.0
@@ -39,56 +39,84 @@ PackageDescription: <text>Sync Kodi add-on settings across multiple
 devices/installations</text>
 
 
-# File
+# Files
+
+FileName: ./.editorconfig
+SPDXID: SPDXRef-c4766e2729defc6ca2ace541789d41d5
+FileType: SOURCE
+FileChecksum: SHA1: 610d7fafafae1c5da2e292f7873664c35be9572b
+LicenseConcluded: CC0-1.0
+LicenseInfoInFile: CC0-1.0
+FileCopyrightText: <text> 2020-2021 Peter J. Mello <admin@petermello.net></text>
+
+FileName: ./.pre-commit-config.yaml
+SPDXID: SPDXRef-9c8a8c143b45dfc49bff9bd15cd65241
+FileType: SOURCE
+FileChecksum: SHA1: 45157bfd2524732562db58be5244213c7bae1623
+LicenseConcluded: CC0-1.0
+LicenseInfoInFile: CC0-1.0
+FileCopyrightText: <text> 2020-2021 Peter J. Mello <admin@petermello.net></text>
+
+FileName: ./.style.yapf
+SPDXID: SPDXRef-63956dfae57c559b0c34114283c1b84e
+FileType: SOURCE
+FileChecksum: SHA1: d7e4576448d76974ef72ec6ea6e422398e06797c
+LicenseConcluded: CC0-1.0
+LicenseInfoInFile: CC0-1.0
+FileCopyrightText: <text> 2020-2021 Peter J. Mello <admin@petermello.net></text>
 
 FileName: ./README.adoc
-SPDXID: SPDXRef-5007207fd94768d665f628df699670a2
+SPDXID: SPDXRef-81d5bbdbc9430647957ff9bb8331344b
 FileType: DOCUMENTATION
-FileChecksum: SHA1: c8d68749fb8c558f27afca1c5b54bcb589f0d7c2
+FileChecksum: SHA1: 1da9e8cda326abaff7b058c96090ea33d4fdfed8
 LicenseConcluded: CC0-1.0
 LicenseInfoInFile: CC0-1.0
 FileCopyrightText: <text>© 2016-2018 Rob Webset
  2020-2021 Peter J. Mello <admin@petermello.net></text>
 
-
-# File
+FileName: ./__init__.py
+SPDXID: SPDXRef-7d4e192f5e60b5c435efd3467c97c884
+FileType: SOURCE
+FileChecksum: SHA1: 94d44e45d8ee3d51fc8f88b1647bd6a2a8c127f8
+LicenseConcluded: MPL-2.0
+LicenseInfoInFile: MPL-2.0
+FileCopyrightText: <text> 2020-2021 Peter J. Mello <admin@petermello.net></text>
 
 FileName: ./addon.xml
-SPDXID: SPDXRef-4e676c1988d9722b31ddc8b24e05ef5d
+SPDXID: SPDXRef-9e5dc6aff0635684f225d98dd3a00180
 FileType: SOURCE
-FileChecksum: SHA1: e8ce404fb078bc8aecbb355f3daf6279afe789d8
+FileChecksum: SHA1: 0ef1345465792631d006c8e7481380c4b30c492d
 LicenseConcluded: MPL-2.0
 LicenseInfoInFile: MPL-2.0
 FileCopyrightText: <text>© 2016-2018 Rob Webset
 © 2019 Robert Hudson
  2020-2021 Peter J. Mello <admin@petermello.net></text>
 
-
-# File
-
 FileName: ./default.py
-SPDXID: SPDXRef-4fe2c54347f04da49f19d38ef276a65e
+SPDXID: SPDXRef-cb86c48de4f27b302ddb9a20f056229f
 FileType: SOURCE
-FileChecksum: SHA1: 565d2b8b79dbe1e8df046a4e66cf5e9a824f30d6
+FileChecksum: SHA1: c1fbb2f5bbeac8b83d262f28816eb9fc501a90e5
 LicenseConcluded: MPL-2.0
 LicenseInfoInFile: MPL-2.0
 FileCopyrightText: <text>© 2016 Rob Webset
  2020-2021 Peter J. Mello <admin@petermello.net></text>
-
-
-# File
 
 FileName: ./filter.py
-SPDXID: SPDXRef-48a12e8ab7e81bd514770ebcad6a06cd
+SPDXID: SPDXRef-e37b38d691ab2db750e5e5dba85fa445
 FileType: SOURCE
-FileChecksum: SHA1: 6a7af6320469ac6476c70bda1755cff48be31363
+FileChecksum: SHA1: fa3ddc5bb0a3f79be90a2e463bdf5b0207966375
 LicenseConcluded: MPL-2.0
 LicenseInfoInFile: MPL-2.0
 FileCopyrightText: <text>© 2016 Rob Webset
  2020-2021 Peter J. Mello <admin@petermello.net></text>
 
-
-# File
+FileName: ./pylintrc
+SPDXID: SPDXRef-c81a64431420c26d14f89958e508c6e3
+FileType: SOURCE
+FileChecksum: SHA1: 31de7ebf0b08a9be9ae92ec1eac60a4747d712cc
+LicenseConcluded: CC0-1.0
+LicenseInfoInFile: CC0-1.0
+FileCopyrightText: <text> 2020-2021 Peter J. Mello <admin@petermello.net></text>
 
 FileName: ./resources/Kodi-logo.png
 SPDXID: SPDXRef-450ceb4745e802bf31ffd6674849f5aa
@@ -98,9 +126,6 @@ LicenseConcluded: GPL-2.0-or-later
 LicenseInfoInFile: GPL-2.0-or-later
 FileCopyrightText: <text>© 2010-2021 The Kodi Foundation <trademark@kodi.tv></text>
 
-
-# File
-
 FileName: ./resources/REUSE-compliant.svg
 SPDXID: SPDXRef-811e522e97c7a5a03ecbbbe658b189f9
 FileType: IMAGE
@@ -109,32 +134,40 @@ LicenseConcluded: CC0-1.0
 LicenseInfoInFile: CC0-1.0
 FileCopyrightText: <text>Free Software Foundation Europe</text>
 
+FileName: ./resources/__init__.py
+SPDXID: SPDXRef-d96a89f160f93be73f754ee693212cde
+FileType: SOURCE
+FileChecksum: SHA1: 4e67cebfc35667c6c9db4ce5b4e03a7c9cc45f85
+LicenseConcluded: MPL-2.0
+LicenseInfoInFile: MPL-2.0
+FileCopyrightText: <text> 2020-2021 Peter J. Mello <admin@petermello.net></text>
 
-# File
-
-FileName: ./resources/banner.jpg
-SPDXID: SPDXRef-343dd44553726cf8ceed56f5f11d7c12
+FileName: ./resources/banner.png
+SPDXID: SPDXRef-69639f87b4200624f79b0fb0b061b84b
 FileType: IMAGE
-FileChecksum: SHA1: b4a15b820de01b27ba53811f25caea8189034fef
+FileChecksum: SHA1: 895c593f23db6b2da2507b3a7b21e5d6760c452f
 LicenseConcluded: MPL-2.0
 LicenseInfoInFile: MPL-2.0
 FileCopyrightText: <text>© 2016 Rob Webset
  2020-2021 Peter J. Mello <admin@petermello.net></text>
 
-
-# File
-
-FileName: ./resources/fanart.jpg
-SPDXID: SPDXRef-4a9911b14b69a288e1751b1b0205bd3d
+FileName: ./resources/clearlogo.png
+SPDXID: SPDXRef-046d441675df30d31c0d5a3344d5ab98
 FileType: IMAGE
-FileChecksum: SHA1: 880b593f056dd43c2490575e974a6805b41faafc
+FileChecksum: SHA1: 199e68576657057d1a042424262aa8bae72a1d53
 LicenseConcluded: MPL-2.0
 LicenseInfoInFile: MPL-2.0
 FileCopyrightText: <text>© 2016 Rob Webset
  2020-2021 Peter J. Mello <admin@petermello.net></text>
 
-
-# File
+FileName: ./resources/fanart.png
+SPDXID: SPDXRef-f142b98b74a493ede2b744af685693ce
+FileType: IMAGE
+FileChecksum: SHA1: 48cba1c2faf5319eaa0f44f6c6f3f6074d374e13
+LicenseConcluded: MPL-2.0
+LicenseInfoInFile: MPL-2.0
+FileCopyrightText: <text>© 2016 Rob Webset
+ 2020-2021 Peter J. Mello <admin@petermello.net></text>
 
 FileName: ./resources/icon.png
 SPDXID: SPDXRef-21737daad30deb1e12f13cdb43064451
@@ -145,157 +178,137 @@ LicenseInfoInFile: MPL-2.0
 FileCopyrightText: <text>© 2016 Rob Webset
  2020-2021 Peter J. Mello <admin@petermello.net></text>
 
-
-# File
-
 FileName: ./resources/language/resource.language.en_gb/strings.po
-SPDXID: SPDXRef-1e6209ae5f95c0cddae8071e7f751cb9
+SPDXID: SPDXRef-e59266532857a5750650cc5cf6c4ccd2
 FileType: TEXT
-FileChecksum: SHA1: f97dccfe3dd38b639ee9c37afdf140af9c498d1f
+FileChecksum: SHA1: 2e38e5235a15d04bdd183a9a38c12ea7f1a4b9e3
 LicenseConcluded: MPL-2.0
 LicenseInfoInFile: MPL-2.0
 FileCopyrightText: <text>© 2016 Rob Webset
  2020-2021 Peter J. Mello <admin@petermello.net></text>
-
-
-# File
 
 FileName: ./resources/language/resource.language.en_us/strings.po
-SPDXID: SPDXRef-6e97fde13b6988cc783dbf96804c4e42
+SPDXID: SPDXRef-742d86448425b58f3de7af4a9daeb87b
 FileType: TEXT
-FileChecksum: SHA1: 56c6f2f16a5320264cb585334157009f36e94d25
+FileChecksum: SHA1: 3b1f8db0c537180bc6f9025eed3982c8bb4ce97f
 LicenseConcluded: MPL-2.0
 LicenseInfoInFile: MPL-2.0
 FileCopyrightText: <text> 2020-2021 Peter J. Mello <admin@petermello.net></text>
-
-
-# File
 
 FileName: ./resources/language/resource.language.pt_pt/strings.po
-SPDXID: SPDXRef-6d53c8dcfd735e084c70069077c0f35f
+SPDXID: SPDXRef-2c38536fb472006359f6682f53da2608
 FileType: TEXT
-FileChecksum: SHA1: 9f2a521e6d8612b5b85a7e010b4e1ab71dfe7731
+FileChecksum: SHA1: 41be11197d17d6835e146e6feebfb95377b3320b
 LicenseConcluded: MPL-2.0
 LicenseInfoInFile: MPL-2.0
 FileCopyrightText: <text> 2020-2021 Peter J. Mello <admin@petermello.net></text>
 
-
-# File
+FileName: ./resources/lib/__init__.py
+SPDXID: SPDXRef-a7ced25e81c19b2bc9b18bf10ce7f2f9
+FileType: SOURCE
+FileChecksum: SHA1: 80e7e7b3d9973ba9fed9f1c107c4a83a84c732a3
+LicenseConcluded: MPL-2.0
+LicenseInfoInFile: MPL-2.0
+FileCopyrightText: <text> 2020-2021 Peter J. Mello <admin@petermello.net></text>
 
 FileName: ./resources/lib/core.py
-SPDXID: SPDXRef-f65d79a626bbdf7300d5b9f6c3ab5605
+SPDXID: SPDXRef-9c3e4dba34e9ebee9d419a537d2ba212
 FileType: SOURCE
-FileChecksum: SHA1: 5e271c930c8d94952377d000717843b1a1a23bf7
+FileChecksum: SHA1: 21252568e6263ad5d0002d5d996b963317188a54
 LicenseConcluded: MPL-2.0
 LicenseInfoInFile: MPL-2.0
 FileCopyrightText: <text>© 2016 Rob Webset
  2020-2021 Peter J. Mello <admin@petermello.net></text>
-
-
-# File
 
 FileName: ./resources/lib/settings.py
-SPDXID: SPDXRef-39a3f61e8544992da3c7920836e7ea00
+SPDXID: SPDXRef-1166da7da7523798e67eb1a689f07d3d
 FileType: SOURCE
-FileChecksum: SHA1: e9961861e1c49db7c21598a618885a769f043fff
+FileChecksum: SHA1: d00622cc18f800ef5acfc269273ea8e069828e0c
 LicenseConcluded: MPL-2.0
 LicenseInfoInFile: MPL-2.0
 FileCopyrightText: <text>© 2016 Rob Webset
  2020-2021 Peter J. Mello <admin@petermello.net></text>
 
-
-# File
-
-FileName: ./resources/logo.png
-SPDXID: SPDXRef-82d2a2f4ba380e7fccc6a41c82eda74c
+FileName: ./resources/screenshot-01.png
+SPDXID: SPDXRef-741fbc46b16a5afd111d5f5745135e97
 FileType: IMAGE
-FileChecksum: SHA1: 199e68576657057d1a042424262aa8bae72a1d53
+FileChecksum: SHA1: 6e929e316545952d2a66f46af4ab36726a9df296
 LicenseConcluded: MPL-2.0
 LicenseInfoInFile: MPL-2.0
-FileCopyrightText: <text>© 2016 Rob Webset
- 2020-2021 Peter J. Mello <admin@petermello.net></text>
+FileCopyrightText: <text> 2020-2021 Peter J. Mello <admin@petermello.net></text>
 
-
-# File
-
-FileName: ./resources/screenshot-01.jpg
-SPDXID: SPDXRef-09c9dac02979a91385b244c80f2df1d3
+FileName: ./resources/screenshot-02.png
+SPDXID: SPDXRef-59ab2e47c90a23021c49afb44f4c2846
 FileType: IMAGE
-FileChecksum: SHA1: a8c7f3725c97065cfde077afc938c4ee46821d80
+FileChecksum: SHA1: 64dad913216b2b123ab6a2d6ce693eb9abd4ecc6
 LicenseConcluded: MPL-2.0
 LicenseInfoInFile: MPL-2.0
-FileCopyrightText: <text>© 2016 Rob Webset
- 2020-2021 Peter J. Mello <admin@petermello.net></text>
+FileCopyrightText: <text> 2020-2021 Peter J. Mello <admin@petermello.net></text>
 
-
-# File
-
-FileName: ./resources/screenshot-02.jpg
-SPDXID: SPDXRef-03be7b4664ddd2119574919eca527134
+FileName: ./resources/screenshot-03.png
+SPDXID: SPDXRef-1e477facc48aaf14e27ed857dbd84671
 FileType: IMAGE
-FileChecksum: SHA1: d6be43989819fc00e4f5055a6024d8b246e1c1b8
+FileChecksum: SHA1: 3d761aa927137d5f2dba1ec76533d2908fe4579c
 LicenseConcluded: MPL-2.0
 LicenseInfoInFile: MPL-2.0
-FileCopyrightText: <text>© 2016 Rob Webset
- 2020-2021 Peter J. Mello <admin@petermello.net></text>
-
-
-# File
-
-FileName: ./resources/screenshot-03.jpg
-SPDXID: SPDXRef-ddeada7a35339ef20a2e5ba801dc52be
-FileType: IMAGE
-FileChecksum: SHA1: 66e274c278f7ef7fb95edd2c1fb6c9d7d0774945
-LicenseConcluded: MPL-2.0
-LicenseInfoInFile: MPL-2.0
-FileCopyrightText: <text>© 2016 Rob Webset
- 2020-2021 Peter J. Mello <admin@petermello.net></text>
-
-
-# File
+FileCopyrightText: <text> 2020-2021 Peter J. Mello <admin@petermello.net></text>
 
 FileName: ./resources/settings.xml
-SPDXID: SPDXRef-12da977e0df60bddeff733a2e9477fd8
+SPDXID: SPDXRef-593b8b0270a2c4d711111c739bc3ac07
 FileType: SOURCE
-FileChecksum: SHA1: 2b8c2d282c8183fcef87979f4497534c2848366b
+FileChecksum: SHA1: e74cd135dd86cbf54775c46fb8d46ef8e6ea8fe1
 LicenseConcluded: MPL-2.0
 LicenseInfoInFile: MPL-2.0
 FileCopyrightText: <text>© 2016-2018 Rob Webset
  2020-2021 Peter J. Mello <admin@petermello.net></text>
 
-
-# File
-
 FileName: ./service.py
-SPDXID: SPDXRef-1f06000a22e3529dc318f8812aac315a
+SPDXID: SPDXRef-9bcd3591e62f33d6f3c20e068de0470c
 FileType: SOURCE
-FileChecksum: SHA1: 4a449ad585255c3f9b80ab63a0260c7727f3a0a4
+FileChecksum: SHA1: 9e49a3c7e2eebd588650f32f483c7db1b7a217ed
 LicenseConcluded: MPL-2.0
 LicenseInfoInFile: MPL-2.0
 FileCopyrightText: <text>© 2016 Rob Webset
 © 2019 Robert Hudson
  2020-2021 Peter J. Mello <admin@petermello.net></text>
 
+FileName: ./tox.ini
+SPDXID: SPDXRef-593bee09ee0bc0566ba8e3feb647a57a
+FileType: SOURCE
+FileChecksum: SHA1: 88c3092232184670480da47691fe74350746aed2
+LicenseConcluded: CC0-1.0
+LicenseInfoInFile: CC0-1.0
+FileCopyrightText: <text> 2020-2021 Peter J. Mello <admin@petermello.net></text>
+
 
 # Relationships
 
-Relationship: SPDXRef-DOCUMENT describes SPDXRef-5007207fd94768d665f628df699670a2
-Relationship: SPDXRef-DOCUMENT describes SPDXRef-4e676c1988d9722b31ddc8b24e05ef5d
-Relationship: SPDXRef-DOCUMENT describes SPDXRef-4fe2c54347f04da49f19d38ef276a65e
-Relationship: SPDXRef-DOCUMENT describes SPDXRef-48a12e8ab7e81bd514770ebcad6a06cd
+Relationship: SPDXRef-DOCUMENT describes SPDXRef-f545c89a02e8450bb58c855be3ea4afc
+Relationship: SPDXRef-DOCUMENT describes SPDXRef-c4766e2729defc6ca2ace541789d41d5
+Relationship: SPDXRef-DOCUMENT describes SPDXRef-9c8a8c143b45dfc49bff9bd15cd65241
+Relationship: SPDXRef-DOCUMENT describes SPDXRef-63956dfae57c559b0c34114283c1b84e
+Relationship: SPDXRef-DOCUMENT describes SPDXRef-81d5bbdbc9430647957ff9bb8331344b
+Relationship: SPDXRef-DOCUMENT describes SPDXRef-7d4e192f5e60b5c435efd3467c97c884
+Relationship: SPDXRef-DOCUMENT describes SPDXRef-9e5dc6aff0635684f225d98dd3a00180
+Relationship: SPDXRef-DOCUMENT describes SPDXRef-cb86c48de4f27b302ddb9a20f056229f
+Relationship: SPDXRef-DOCUMENT describes SPDXRef-e37b38d691ab2db750e5e5dba85fa445
+Relationship: SPDXRef-DOCUMENT describes SPDXRef-c81a64431420c26d14f89958e508c6e3
 Relationship: SPDXRef-DOCUMENT describes SPDXRef-450ceb4745e802bf31ffd6674849f5aa
 Relationship: SPDXRef-DOCUMENT describes SPDXRef-811e522e97c7a5a03ecbbbe658b189f9
-Relationship: SPDXRef-DOCUMENT describes SPDXRef-343dd44553726cf8ceed56f5f11d7c12
-Relationship: SPDXRef-DOCUMENT describes SPDXRef-4a9911b14b69a288e1751b1b0205bd3d
+Relationship: SPDXRef-DOCUMENT describes SPDXRef-d96a89f160f93be73f754ee693212cde
+Relationship: SPDXRef-DOCUMENT describes SPDXRef-69639f87b4200624f79b0fb0b061b84b
+Relationship: SPDXRef-DOCUMENT describes SPDXRef-046d441675df30d31c0d5a3344d5ab98
+Relationship: SPDXRef-DOCUMENT describes SPDXRef-f142b98b74a493ede2b744af685693ce
 Relationship: SPDXRef-DOCUMENT describes SPDXRef-21737daad30deb1e12f13cdb43064451
-Relationship: SPDXRef-DOCUMENT describes SPDXRef-1e6209ae5f95c0cddae8071e7f751cb9
-Relationship: SPDXRef-DOCUMENT describes SPDXRef-6e97fde13b6988cc783dbf96804c4e42
-Relationship: SPDXRef-DOCUMENT describes SPDXRef-6d53c8dcfd735e084c70069077c0f35f
-Relationship: SPDXRef-DOCUMENT describes SPDXRef-f65d79a626bbdf7300d5b9f6c3ab5605
-Relationship: SPDXRef-DOCUMENT describes SPDXRef-39a3f61e8544992da3c7920836e7ea00
-Relationship: SPDXRef-DOCUMENT describes SPDXRef-82d2a2f4ba380e7fccc6a41c82eda74c
-Relationship: SPDXRef-DOCUMENT describes SPDXRef-09c9dac02979a91385b244c80f2df1d3
-Relationship: SPDXRef-DOCUMENT describes SPDXRef-03be7b4664ddd2119574919eca527134
-Relationship: SPDXRef-DOCUMENT describes SPDXRef-ddeada7a35339ef20a2e5ba801dc52be
-Relationship: SPDXRef-DOCUMENT describes SPDXRef-12da977e0df60bddeff733a2e9477fd8
-Relationship: SPDXRef-DOCUMENT describes SPDXRef-1f06000a22e3529dc318f8812aac315a
+Relationship: SPDXRef-DOCUMENT describes SPDXRef-e59266532857a5750650cc5cf6c4ccd2
+Relationship: SPDXRef-DOCUMENT describes SPDXRef-742d86448425b58f3de7af4a9daeb87b
+Relationship: SPDXRef-DOCUMENT describes SPDXRef-2c38536fb472006359f6682f53da2608
+Relationship: SPDXRef-DOCUMENT describes SPDXRef-a7ced25e81c19b2bc9b18bf10ce7f2f9
+Relationship: SPDXRef-DOCUMENT describes SPDXRef-9c3e4dba34e9ebee9d419a537d2ba212
+Relationship: SPDXRef-DOCUMENT describes SPDXRef-1166da7da7523798e67eb1a689f07d3d
+Relationship: SPDXRef-DOCUMENT describes SPDXRef-741fbc46b16a5afd111d5f5745135e97
+Relationship: SPDXRef-DOCUMENT describes SPDXRef-59ab2e47c90a23021c49afb44f4c2846
+Relationship: SPDXRef-DOCUMENT describes SPDXRef-1e477facc48aaf14e27ed857dbd84671
+Relationship: SPDXRef-DOCUMENT describes SPDXRef-593b8b0270a2c4d711111c739bc3ac07
+Relationship: SPDXRef-DOCUMENT describes SPDXRef-9bcd3591e62f33d6f3c20e068de0470c
+Relationship: SPDXRef-DOCUMENT describes SPDXRef-593bee09ee0bc0566ba8e3feb647a57a

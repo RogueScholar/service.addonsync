@@ -16,6 +16,10 @@ repos:
       - id: fix-byte-order-marker
       - id: mixed-line-ending
       - id: trailing-whitespace
+  - repo: https://github.com/Lucas-C/pre-commit-hooks
+    rev: v1.1.10
+    hooks:
+      - id: remove-crlf
   - repo: https://github.com/PyCQA/flake8
     rev: 3.9.2
     hooks:
@@ -25,4 +29,9 @@ repos:
     rev: v0.13.0
     hooks:
       - id: reuse
+  - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
+    rev: 2.3.54
+    hooks:
+      - id: editorconfig-checker-system
+        alias: ec
 ...

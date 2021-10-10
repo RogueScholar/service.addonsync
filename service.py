@@ -9,7 +9,7 @@
 from __future__ import annotations, generator_stop
 from xbmcaddon import Addon
 
-from resources.lib.settings import log, Settings
+from resources.lib.settings import Settings, log
 from resources.lib.core import AddonSync
 
 ADDON = Addon(id="service.addonsync")

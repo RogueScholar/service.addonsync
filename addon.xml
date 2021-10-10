@@ -54,7 +54,7 @@ SPDX-License-Identifier: MPL-2.0
     </lifecyclestate>
     <assets>
       <banner>resources/banner.png</banner>
-	  <clearlogo>resources/clearlogo.png</clearlogo>
+      <clearlogo>resources/clearlogo.png</clearlogo>
       <fanart>resources/fanart.png</fanart>
       <icon>resources/icon.png</icon>
       <screenshot>resources/screenshot-01.png</screenshot>
