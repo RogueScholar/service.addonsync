@@ -1,17 +1,23 @@
 # -*- coding: utf-8; python-indent-offset: 2; python-guess-indent: nil; -*-
-# SPDX-FileCopyrightText: © 2016 Rob Webset
-# SPDX-FileCopyrightText:  2020-2021 Peter J. Mello <admin@petermello.net>
-#
-# SPDX-License-Identifier: MPL-2.0
-"""Read and store add-on configuration under userdata."""
+"""Read and store add-on configuration under userdata.
+
+This file is part of service.addonsync.
+
+SPDX-FileCopyrightText: © 2016 Rob Webset
+SPDX-FileCopyrightText:  2020-2021 Peter J. Mello <admin@petermello.net>
+
+SPDX-License-Identifier: MPL-2.0
+
+See LICENSES/MPL-2.0.txt for more information.
+"""
 
 from __future__ import annotations, generator_stop
 import os
 import xbmc
-import xbmcaddon
 import xbmcvfs
+from xbmcaddon import Addon
 
-ADDON = xbmcaddon.Addon(id="service.addonsync")
+ADDON = Addon(id="service.addonsync")
 ADDON_ID = ADDON.getAddonInfo("id")
 
 
@@ -83,7 +89,7 @@ def nested_delete(root_dir):
     # Now remove the actual directory
     xbmcvfs.rmdir(root_dir)
   else:
-    log("nested_delete: Directory {root_dir} does not exist")
+    log(f"nested_delete: Directory {root_dir} does not exist")
 
 
 class Settings:

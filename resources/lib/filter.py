@@ -1,9 +1,15 @@
 # -*- coding: utf-8; python-indent-offset: 2; python-guess-indent: nil; -*-
-# SPDX-FileCopyrightText: © 2016 Rob Webset
-# SPDX-FileCopyrightText:  2020-2021 Peter J. Mello <admin@petermello.net>
-#
-# SPDX-License-Identifier: MPL-2.0
-"""Apply include/exclude filters for installed add-ons if so configured."""
+"""Apply include/exclude filters for installed add-ons if so configured.
+
+This file is part of service.addonsync.
+
+SPDX-FileCopyrightText: © 2016 Rob Webset
+SPDX-FileCopyrightText:  2020-2021 Peter J. Mello <admin@petermello.net>
+
+SPDX-License-Identifier: MPL-2.0
+
+See LICENSES/MPL-2.0.txt for more information.
+"""
 
 from __future__ import absolute_import
 import json
@@ -12,7 +18,7 @@ from xbmcaddon import Addon
 import xbmcgui
 
 # Import the common settings
-from resources.lib.settings import Settings, log
+from .settings import Settings, log
 
 ADDON = Addon(id="service.addonsync")
 
@@ -26,7 +32,7 @@ if __name__ == "__main__":
   if FILTER_TYPE == Settings.FILTER_ALL:
     log("AddonFilter: Filter called when there is no filter required")
   else:
-    # Make the call to find out all the addons that are installed
+    # Make the call to find out all the add-ons that are installed
     JSON_QUERY = xbmc.executeJSONRPC(
         '{ "jsonrpc": "2.0", "method": "Addons.GetAddons", "params": { "enabled": true, "properties": [ "broken", "name" ] }, "id": 1 }'  # noqa
         )
@@ -39,27 +45,31 @@ if __name__ == "__main__":
       # Check each of the screensavers that are installed on the system
       for addon_item in json_response["result"]["addons"]:
         addon_name = addon_item["addonid"]
-        # Need to skip both built-in screensavers as they cannot be
-        # triggered and are a bit dull, so shouldn't be in the mix
+        # Need to skip both built-in screensavers as they cannot be triggered
+        # and are a bit dull, so shouldn't be in the mix
         if addon_name in [
             "screensaver.xbmc.builtin.black",
             "screensaver.xbmc.builtin.dim",
             "service.xbmc.versioncheck",
             ]:
-          log(f"AddonFilter: Skipping built-in addons: {addon_name}")
+          log(f"AddonFilter: Skipping built-in add-ons: {addon_name}")
           continue
 
+        # Skip metadata add-ons
         if addon_name.startswith("metadata"):
-          log(f"AddonFilter: Skipping metadata addon: {addon_name}")
+          log(f"AddonFilter: Skipping metadata add-on: {addon_name}")
           continue
+        # Skip localization add-ons
         if addon_name.startswith("resource.language"):
-          log(f"AddonFilter: Skipping l10n addon: {addon_name}")
+          log(f"AddonFilter: Skipping localization add-on: {addon_name}")
           continue
+        # Skip add-on repositories
         if addon_name.startswith("repository"):
-          log(f"AddonData: Skipping repository addon: {addon_name}")
+          log(f"AddonFilter: Skipping add-on repository: {addon_name}")
           continue
+        # Skip skin add-ons
         if addon_name.startswith("skin"):
-          log(f"AddonData: Skipping skin addon: {addon_name}")
+          log(f"AddonFilter: Skipping skin add-on: {addon_name}")
           continue
 
         # Skip ourself as we don't want to flip a slave into a master
@@ -73,16 +83,13 @@ if __name__ == "__main__":
           continue
 
         # Now we are left with only the working add-ons
-        log("AddonFilter: Detected Addon: %s (%s)"
-            % (addon_name, addon_item["name"]))
+        log(f"AddonFilter: Detected Addon: {addon_name} ({addon_item['name']})")
         addons[addon_item["name"]] = addon_name
 
       if len(addons) < 1:
         log("AddonFilter: No Addons installed")
-        xbmcgui.Dialog().ok(
-            ADDON.getLocalizedString(32001),
-            ADDON.getLocalizedString(32011).encode("utf-8"),
-            )
+        xbmcgui.Dialog().ok(ADDON.getLocalizedString(32001),
+                            ADDON.getLocalizedString(32011))
       else:
         # Get the names of the addons and order them
         ADDON_NAMES = list(addons.keys())

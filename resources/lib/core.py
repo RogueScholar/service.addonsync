@@ -1,9 +1,15 @@
-# -*- coding: utf-8 -*-
-# SPDX-FileCopyrightText: © 2016 Rob Webset
-# SPDX-FileCopyrightText:  2020-2021 Peter J. Mello <admin@petermello.net>
-#
-# SPDX-License-Identifier: MPL-2.0
-"""This module generates all the hash values for the installed addons."""
+# -*- coding: utf-8; python-indent-offset: 2; python-guess-indent: nil; -*-
+"""This module generates all the hash values for the installed addons.
+
+This file is part of service.addonsync.
+
+SPDX-FileCopyrightText: © 2016 Rob Webset
+SPDX-FileCopyrightText:  2020-2021 Peter J. Mello <admin@petermello.net>
+
+SPDX-License-Identifier: MPL-2.0
+
+See LICENSES/MPL-2.0.txt for more information.
+"""
 
 from __future__ import annotations, generator_stop
 import hashlib
@@ -15,14 +21,14 @@ import xml.etree.ElementTree as ElemenTree  # nosec
 from defusedxml import defuse_stdlib
 
 import xbmc
-import xbmcaddon
 import xbmcgui
 import xbmcvfs
+from xbmcaddon import Addon
 
 from .settings import Settings, log, nested_copy, nested_delete, os_path_join
 
 ID = "service.addonsync"
-ADDON = xbmcaddon.Addon(ID)
+ADDON = Addon(ID)
 ICON = ADDON.getAddonInfo("icon")
 
 
@@ -84,7 +90,7 @@ class Hash:
     hasher = hashfunc()
     for hashvalue in sorted(hashlist):
       if hashvalue not in [None, ""]:
-        hasher.update(hashvalue.encode("utf-8"))
+        hasher.update(hashvalue)
     return hasher.hexdigest()
 
 
@@ -178,23 +184,25 @@ class AddonData:
         addon_name = addon_item["addonid"]
         # Need to skip the two built-in screensavers as they can not be
         # triggered and are a bit dull, thus should not be in the mix
-        if addon_name in ["screensaver.xbmc.builtin.black",
-                          "screensaver.xbmc.builtin.dim",
-                          "service.xbmc.versioncheck"]:
-          log(f"AddonData: Skipping built-in addons: {addon_name}")
+        if addon_name in [
+            "screensaver.xbmc.builtin.black",
+            "screensaver.xbmc.builtin.dim",
+            "service.xbmc.versioncheck"
+            ]:
+          log(f"AddonData: Skipping built-in add-ons: {addon_name}")
           continue
 
         if addon_name.startswith("metadata"):
-          log(f"AddonData: Skipping metadata addon: {addon_name}")
+          log(f"AddonData: Skipping metadata add-on: {addon_name}")
           continue
         if addon_name.startswith("resource.language"):
-          log(f"AddonData: Skipping l10n addon: {addon_name}")
+          log(f"AddonData: Skipping localization add-on: {addon_name}")
           continue
         if addon_name.startswith("repository"):
-          log(f"AddonData: Skipping repository addon: {addon_name}")
+          log(f"AddonData: Skipping repository add-on: {addon_name}")
           continue
         if addon_name.startswith("skin"):
-          log(f"AddonData: Skipping skin addon: {addon_name}")
+          log(f"AddonData: Skipping skin add-on: {addon_name}")
           continue
 
         # Skip ourselves so we don't update a slave with a master
@@ -204,40 +212,37 @@ class AddonData:
 
         # Need to ensure we skip any addons that are flagged as broken
         if addon_item["broken"]:
-          log(f"AddonData: Skipping broken addon: {addon_name}")
+          log(f"AddonData: Skipping broken add-on: {addon_name}")
           continue
 
         # Now we are left with only the working addons
-        log(f"AddonData: Detected Addon: {addon_name}")
+        log(f"AddonData: Detected add-on: {addon_name}")
         addons[addon_name] = addon_item["version"]
 
     return addons
 
   def _get_addon_settings_directory(self, addon_name):
-    log(f"AddonData: Get addon settings directory for {addon_name}")
+    log(f"AddonData: Get add-on settings directory for {addon_name}")
 
-    addon_info = xbmcaddon.Addon(addon_name)
+    addon_info = Addon(addon_name)
     if addon_info in [None, ""]:
-      log(f"AddonData: Failed to get addon data for {addon_name}")
+      log(f"AddonData: Failed to get add-on data for {addon_name}")
       return None
 
     addon_profile = addon_info.getAddonInfo("profile")
     if addon_profile in [None, ""]:
-      log(f"AddonData: Failed to get addon profile for {addon_name}")
+      log(f"AddonData: Failed to get add-on profile for {addon_name}")
       return None
 
     config_path = xbmcvfs.translatePath(addon_profile)
 
     # Check if the directory exists
     if xbmcvfs.exists(config_path):
-      log(f"AddonData: addon: {addon_name} path: {config_path}")
+      log(f"AddonData: id: {addon_name} path: {config_path}")
       config_path = addon_profile
     else:
       # If the path does not exist then we will not need to copy this one
-      log(
-          f"AddonData: addon: {addon_name} "
-          f"path: {config_path} doesn't exist"
-          )
+      log(f"AddonData: id: {addon_name} path: {config_path} doesn't exist")
       config_path = None
 
     return config_path
@@ -275,10 +280,7 @@ class AddonData:
         file_content = ElemenTree.tostring(root, encoding="UTF-8")
         record_file.write(file_content)
       except (ElemenTree.ParseError, OSError, ValueError):
-        log(
-            f"AddonData: Failed to write file: {record_file}",
-            xbmc.LOGERROR,
-            )
+        log(f"AddonData: Failed to write file: {record_file}", xbmc.LOGERROR)
         log(f"AddonData: {traceback.format_exc()}", xbmc.LOGERROR)
       record_file.close()
 
@@ -359,7 +361,7 @@ class AddonData:
         if addon_detail["hash"] == stored_hashsums[addon_name]["hash"]:
           log(
               f"AddonSync: Backup for addon {addon_name} "
-              "already up to date with hash %s" % addon_detail["hash"]
+              f"already up to date with hash {addon_detail['hash']}"
               )
         continue
 
@@ -407,7 +409,7 @@ class AddonData:
     for addon_name in list(local_addon_details.keys()):
       # Check if this addon already exists on the source location
       if addon_name not in list(stored_hashsums.keys()):
-        log(f"AddonSync: Local addon {addon_name} not in master data")
+        log(f"AddonSync: Local add-on {addon_name} not in master data")
         continue
 
       # Only copy the items with different hash values
@@ -428,7 +430,8 @@ class AddonData:
                 addon_name,
                 addon_detail["version"],
                 backed_up_details["version"],
-                ))
+                )
+            )
         continue
 
       log(f"AddonSync: Performing copy for {addon_name}")
@@ -475,17 +478,17 @@ class AddonData:
 
         # Need to ensure we skip any addon that are flagged as broken
         if addon_item["broken"]:
-          log(f"AddonSync: Skipping broken addon: {addon_name}")
+          log(f"AddonSync: Skipping broken add-on: {addon_name}")
           continue
 
         # Now we are left with only the addon screensavers
-        log(f"AddonSync: Detected Service Addon: {addon_name}")
+        log(f"AddonSync: Detected service add-on: {addon_name}")
         service_addons.append(addon_name)
 
     return service_addons
 
   def _restart_addon(self, addon_name):
-    log(f"AddonSync: Restarting addon {addon_name}")
+    log(f"AddonSync: Restarting add-on {addon_name}")
 
     # To restart the addon, first disable it, then enable it
     # pylint: disable=line-too-long
@@ -506,7 +509,7 @@ class AddonData:
         break
 
       # Get the current state of the addon
-      log(f"AddonSync: Disabling addon {addon_name}")
+      log(f"AddonSync: Disabling add-on {addon_name}")
       # pylint: disable=line-too-long
       json_query = xbmc.executeJSONRPC(
           '{ "jsonrpc": "2.0", "method": "Addons.GetAddonDetails", "params": { "addonid": "%s", "properties": [ "enabled" ] }, "id": 1 }'  # noqa
@@ -547,7 +550,7 @@ class AddonSync:
     if Settings.is_first_use():
       xbmcgui.Dialog().ok(
           ADDON.getLocalizedString(32001),
-          ADDON.getLocalizedString(32005).encode("utf-8"),
+          ADDON.getLocalizedString(32005),
           )
       Settings.set_first_use()
 
@@ -591,8 +594,8 @@ class AddonSync:
     else:
       log("AddonSync: Central store not set")
       xbmcgui.Dialog().notification(
-          ADDON.getLocalizedString(32001).encode("utf-8"),
-          ADDON.getLocalizedString(32006).encode("utf-8"),
+          ADDON.getLocalizedString(32001),
+          ADDON.getLocalizedString(32006),
           ICON,
           5000,
           False,

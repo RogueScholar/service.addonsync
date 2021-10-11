@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<!--
-    SPDX-FileCopyrightText: © 2016-2018 Rob Webset
-    SPDX-FileCopyrightText:  2020-2021 Peter J. Mello <admin@petermello.net>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><!--
+SPDX-FileCopyrightText: © 2016-2018 Rob Webset
+SPDX-FileCopyrightText:  2020-2021 Peter J. Mello <admin@petermello.net>
 
-    SPDX-License-Identifier: MPL-2.0
--->
-<settings version="1">
+SPDX-License-Identifier: MPL-2.0
+
+See LICENSES/MPL-2.0.txt for more information.
+--><settings version="1">
   <section id="service.addonsync">
     <category id="general" label="32001" help="">
-	  <group id="main" label="">
+    <group id="main" label="">
         <setting id="isFirstUse" type="boolean" label="First Use" help="">
           <level>4</level>
           <visible>false</visible>
@@ -65,7 +65,7 @@
             <dependency type="visible" setting="installationType">1</dependency>
           </dependencies>
         </setting>
-	  </group>
+    </group>
       <group id="debug" label="32002">
         <setting id="logEnabled" type="boolean" label="32003" help="">
           <level>2</level>
@@ -84,7 +84,7 @@
       </group>
     </category>
     <category id="filter" label="32012" help="">
-	  <group id="filtering" label="">
+    <group id="filtering" label="">
         <setting id="forceVersionMatch" type="boolean" label="32024" help="">
           <level>2</level>
           <default>true</default>
@@ -141,7 +141,7 @@
             <hidden>true</hidden>
           </control>
         </setting>
-	  </group>
+    </group>
     </category>
   </section>
 </settings>

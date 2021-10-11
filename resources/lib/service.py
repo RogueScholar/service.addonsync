@@ -1,16 +1,22 @@
 # -*- coding: utf-8; python-indent-offset: 2; python-guess-indent: nil; -*-
-# SPDX-FileCopyrightText: © 2016 Rob Webset
-# SPDX-FileCopyrightText: © 2019 Robert Hudson
-# SPDX-FileCopyrightText:  2020-2021 Peter J. Mello <admin@petermello.net>
-#
-# SPDX-License-Identifier: MPL-2.0
-"""Provide startup service to run at Kodi launch if so configured."""
+"""Provide startup service to run at Kodi launch if so configured.
+
+This file is part of service.addonsync.
+
+SPDX-FileCopyrightText: © 2016 Rob Webset
+SPDX-FileCopyrightText: © 2019 Robert Hudson
+SPDX-FileCopyrightText:  2020-2021 Peter J. Mello <admin@petermello.net>
+
+SPDX-License-Identifier: MPL-2.0
+
+See LICENSES/MPL-2.0.txt for more information.
+"""
 
 from __future__ import annotations, generator_stop
 from xbmcaddon import Addon
 
-from resources.lib.settings import Settings, log
-from resources.lib.core import AddonSync
+from .core import AddonSync
+from .settings import Settings, log
 
 ADDON = Addon(id="service.addonsync")
 
