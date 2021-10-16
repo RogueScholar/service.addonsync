@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: CC0-1.0
 
 **/__pycache__/
+**/.cspell/
 **/.mypy_cache/
 **/.pytest_cache/
 .idea/

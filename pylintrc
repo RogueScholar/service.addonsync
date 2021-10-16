@@ -21,23 +21,22 @@ confidence=
 # --enable=similarities". If you want to run only the classes checker, but have
 # no Warning level messages displayed, use"--disable=all --enable=classes
 # --disable=W"
-disable=abstract-method,apply-builtin,attribute-defined-outside-init,backtick,
+disable=abstract-method,apply-builtin,attribute-defined-outside-init,
         basestring-builtin,buffer-builtin,c-extension-no-member,
         consider-using-enumerate,cmp-builtin,cmp-method,coerce-builtin,
-        coerce-method,delslice-method,div-method,eq-without-hash,
-        execfile-builtin,file-builtin,filter-builtin-not-iterating,fixme,
-        getslice-method,hex-method,idiv-method,implicit-str-concat-in-sequence,
+        coerce-method,delslice-method,div-method,execfile-builtin,file-builtin,
+        filter-builtin-not-iterating,fixme,getslice-method,hex-method,
+        idiv-method,implicit-str-concat-in-sequence,
         inconsistent-return-statements,input-builtin,intern-builtin,
         invalid-str-codec,locally-disabled,long-builtin,long-suffix,
         map-builtin-not-iterating,misplaced-comparison-constant,
-        metaclass-assignment,next-method-called,next-method-defined,
-        no-absolute-import,no-init,nonzero-method,oct-method,
-        parameter-unpacking,raising-string,range-builtin-not-iterating,
-        raw_input-builtin,rdiv-method,reduce-builtin,relative-import,
-        reload-builtin,round-builtin,setslice-method,standarderror-builtin,
-        suppressed-message,too-few-public-methods,unichr-builtin,
-        unicode-builtin,unnecessary-pass,unpacking-in-except,using-cmp-argument,
-        xrange-builtin,zip-builtin-not-iterating
+        metaclass-assignment,next-method-called,next-method-defined,no-init,
+        nonzero-method,oct-method,raising-string,range-builtin-not-iterating,
+        raw_input-builtin,rdiv-method,reduce-builtin,reload-builtin,
+        round-builtin,setslice-method,standarderror-builtin,suppressed-message,
+        too-few-public-methods,unichr-builtin,unicode-builtin,unnecessary-pass,
+        unpacking-in-except,using-cmp-argument,xrange-builtin,
+        zip-builtin-not-iterating
 
 [REPORTS]
 output-format=text

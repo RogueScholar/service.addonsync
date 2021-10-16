@@ -6,7 +6,8 @@ SPDX-FileCopyrightText:  2020-2021 Peter J. Mello <admin@petermello.net>
 SPDX-License-Identifier: MPL-2.0
 
 See LICENSES/MPL-2.0.txt for more information.
---><addon id="service.addonsync" name="AddonSync" version="101.0.2"
+-->
+<addon id="service.addonsync" name="AddonSync" version="101.0.2"
     provider-name="RogueScholar">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
@@ -14,10 +15,15 @@ See LICENSES/MPL-2.0.txt for more information.
     <import addon="script.module.simplejson" version="3.17.0" />
   </requires>
   <extension point="xbmc.service" library="resources/lib/service.py" />
-  <extension point="xbmc.python.script" library="resources/lib/addonsync.py" />
+  <extension point="xbmc.python.script" library="resources/lib/addonsync.py">
+    <provides>executable</provides>
+  </extension>
   <extension point="xbmc.addon.metadata">
     <summary lang="en_US">
-      Synchronize addon settings across installations
+      Synchronize add-on settings across installations
+    </summary>
+    <summary lang="pt_PT">
+      Sincronizar as definições dos extensões nas instalações
     </summary>
     <description lang="en_US">
       Synchronize your add-on settings across all of your Kodi installations

@@ -22,23 +22,25 @@ SPDX-License-Identifier: CC0-1.0
 :url-fossabadge: https://app.fossa.com/api/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync.svg?type=small
 :url-kodiservao: https://kodi.wiki/view/Service_add-ons
 :url-githubwiki: https://github.com/RogueScholar/service.addonsync/wiki
+:url-zipfile: https://github.com/RogueScholar/service.addonsync/archive/refs/heads/main.zip
+:url-ghreleases: https://github.com/RogueScholar/service.addonsync/releases
 :url-fossawidget: https://app.fossa.com/api/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync.svg?type=large
 :url-mpl2: https://mozilla.org/MPL/2.0/
 :url-cczero1: https://creativecommons.org/publicdomain/zero/1.0/
 :url-roguescholar: https://github.com/RogueScholar
 :url-kodifoundation: http://kodi.tv/about/foundation
 
-image:{url-shieldssize}[alt="Repository size in bytes",role="left",height=20,link=]&nbsp;&nbsp;&nbsp;
-image:{url-shieldscommit}[alt="Last Git commit date",role="left",height=20,link="https://github.com/RogueScholar/service.addonsync/commits/main"]&nbsp;&nbsp;&nbsp;
-image:{url-shieldspgp}[alt="Keybase PGP Fingerprint",role="left",height=20,link="https://keybase.io/rscholar/pgp_keys.asc?fingerprint=dd3f5dec271faa1d2f1182d1ac77588d3f3bca1e"]&nbsp;&nbsp;&nbsp;
-image:{url-reusebadge}[alt="REUSE badge",role="left",height=20,link="https://api.reuse.software/info/github.com/RogueScholar/service.addonsync"]&nbsp;&nbsp;&nbsp;
-image:{url-shieldspre}[alt=Pre-Commit Enabled",role="left",height=20,link="https://github.com/pre-commit/pre-commit"]&nbsp;&nbsp;&nbsp;
-image:{url-fossabadge}[alt="FOSSA Status Badge",role="left",height=20,link="https://app.fossa.com/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync?ref=badge_small"] +
+image:{url-shieldssize}[alt="Repository size in bytes",role="left",link=]&nbsp;&nbsp;&nbsp;
+image:{url-shieldscommit}[alt="Last Git commit date",role="left",link="https://github.com/RogueScholar/service.addonsync/commits/main"]&nbsp;&nbsp;&nbsp;
+image:{url-shieldspgp}[alt="Keybase PGP Fingerprint",role="left",link="https://keybase.io/rscholar/pgp_keys.asc?fingerprint=dd3f5dec271faa1d2f1182d1ac77588d3f3bca1e"]&nbsp;&nbsp;&nbsp;
+image:{url-reusebadge}[alt="REUSE badge",role="left",link="https://api.reuse.software/info/github.com/RogueScholar/service.addonsync"]&nbsp;&nbsp;&nbsp;
+image:{url-shieldspre}[alt=Pre-Commit Enabled",role="left",link="https://github.com/pre-commit/pre-commit"]&nbsp;&nbsp;&nbsp;
+image:{url-fossabadge}[alt="FOSSA Status Badge",role="left",link="https://app.fossa.com/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync?ref=badge_small"] +
 
 image::clearlogo.png[alt="AddonSync logo",role="left",width=800,height=310,link="https://kodi.wiki/view/Add-on:AddonSync"]
 
 [discrete]
-==== _{revremark}_
+=== _{revremark}_
 
 == Purpose
 
@@ -47,13 +49,61 @@ There have been several requests over the years for Kodi add-ons to be able to
 sync their configuration across different installations. This Kodi
 {url-kodiservao}[service addon], *AddonSync*, has been built to fill that need.
 
-It allows you to set one of your Kodi installations as the "Master" and have it
-maintain a private add-on settings "repository" in some shared network folder of
-your choosing, and all your other Kodi installations can install this add-on as
-"Slaves" that will download and update the settings for all other add-ons to
-match those the Master has shared, every time Kodi starts.
+The AddonSync service allows you to designate one of your Kodi installations as
+the "Master" and have all your other installations (referred to as "Slaves")
+synchronize their add-on configurations to those used by the Master
+installation. This is made possible by having the Master timestamp all changes
+to your add-ons configurations and record them in an index file to be stored in
+a shared network folder, where also are housed a full copy of said add-on
+configuration files. Subsequently whenever a "Slave" installation is started it
+checks the timestamps of its own add-ons' configurations against the index from
+the Master, and if any are found to be newer, those add-ons' settings are copied
+in full from those used by the Master. This synchronization process can be
+configured to happen every time Kodi starts as well as at a specified recurring
+time interval whenever Kodi is open.
 
 More information can be found on the {url-githubwiki}[GitHub wiki].
+
+== Installation
+
+You can install AddonSync from Kodi's Add-ons panel by selecting the option
+'Install from zip file' and navigating to the location to which you downloaded
+and saved the following file: {url-zipfile}[service.addonsync-main.zip].
+
+It will also be published to the {url-ghreleases}[GitHub Releases page] of this
+repository upon conclusion of the testing phase for the port to Python 3/Kodi
+v19 "Matrix".
+
+== Initial Setup
+
+As described above, AddonSync uses a Master/Slave model and each Kodi
+installation you install it on must be configured to behave as either the Master
+or a Slave. There can be only a single Master installation for each network
+share, but the number of Slave installations that may sync from any Master's
+network share is theoretically unlimited.
+
+First determine which of your Kodi installations will be the Master, and once
+AddonSync is installed and configured on it, then completes the initial copy of
+its addons' settings to the network share, you may begin to setup the "Slaves"
+that will mirror their add-ons' settings from it.
+
+== Default Exclusions
+
+There are some add-ons that by their nature will prove problematic for the
+typical Kodi user to sync between installations, usually because they're
+sensitive to the particular device being used to run Kodi, its display
+resolution or the graphics chipset it is built upon. Common add-ons that fall
+into this grouping include:
+
+* Skins,
+* Metadata scrapers, and
+* Kodi's built-in screensavers
+
+By default, AddonSync will also exclude from the sync process any add-ons whose
+versions are different across different installations. Add-on repositories are
+also omitted from the sync process, so it is left to the user to ensure those
+repos that are required to keep the syncing add-ons upgraded in unison on all
+installations are present and functional.
 
 == FOSSA Analysis
 image::{url-fossawidget}[alt="FOSSA Status Widget",link="https://app.fossa.com/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync?ref=badge_large"]

@@ -76,7 +76,7 @@ See LICENSES/MPL-2.0.txt for more information.
       <group id="ops" label="32021">
         <setting id="runNow" type="action" label="32022" help="">
           <level>0</level>
-          <data>RunScript($CWD/default.py)</data>
+          <data>RunScript($CWD/resources/lib/default.py)</data>
           <control type="button" format="action">
             <close>true</close>
           </control>
@@ -104,7 +104,7 @@ See LICENSES/MPL-2.0.txt for more information.
         </setting>
         <setting id="selectAddons" type="action" label="32017" help="">
           <level>2</level>
-          <data>RunScript($CWD/filter.py)</data>
+          <data>RunScript($CWD/resources/lib/filter.py)</data>
           <control type="button" format="action">
             <close>true</close>
           </control>

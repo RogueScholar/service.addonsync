@@ -1,0 +1,89 @@
+# SPDX-FileCopyrightText:  2020-2021 Peter J. Mello <admin@petermello.net>
+#
+# SPDX-License-Identifier: CC0-1.0
+# See <http://prospector.landscape.io/en/master/> for more information.
+
+output-format: vscode
+
+strictness: medium
+test-warnings: true
+doc-warnings: true
+member-warnings: true
+inherits:
+  - default
+ignore-paths:
+  - docs
+ignore-patterns:
+  - (^|/)skip(this)?(/|$)
+autodetect: true
+max-line-length: 80
+
+bandit:
+  run: true
+  options:
+    config: .bandit.yml
+
+dodgy:
+  run: true
+
+frosted:
+  disable:
+    - E103
+    - E306
+
+mccabe:
+  run: false
+  options:
+    max-complexity: 10
+
+pep8:
+  disable:
+    - W602
+    - W603
+  enable:
+    - W601
+  options:
+    max-line-length: 80
+
+pep257:
+  run: true
+  disable:
+    - D100
+    - D101
+
+pyflakes:
+  disable:
+    - F403
+    - F810
+
+pylint:
+  disable:
+    - bad-builtin
+    - too-few-public-methods
+    - wrong-spelling-in-docstring
+  options:
+    indent-string: '  '
+    max-locals: 15
+    max-returns: 6
+    max-branches: 15
+    max-statements: 60
+    max-parents: 7
+    max-attributes: 7
+    min-public-methods: 1
+    max-public-methods: 20
+    max-module-lines: 1000
+    max-line-length: 80
+
+pyroma:
+  disable:
+    - PYR15
+    - PYR18
+
+mypy:
+  run: true
+  options:
+    ignore-missing-imports: true
+    follow-imports: skip
+
+vulture:
+  run: true

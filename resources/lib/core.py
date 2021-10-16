@@ -70,8 +70,8 @@ class Hash:
             ])
     return self._reduce_hash(hashvalues, hash_func)
 
-  # Generates a hash value for a given file
   def _filehash(self, filepath, hashfunc):
+    """Generate a hash value for a given file."""
     hasher = hashfunc()
     blocksize = 64 * 1024
     try:
@@ -133,8 +133,8 @@ class AddonData:
         addon_detail["version"] = active_addons[addon_name]
     return addon_details
 
-  # Perform and filter the user has set up
   def _filter_addons(self, installed_addons):
+    """If needed, filter the list of add-ons the user has set up before sync."""
     filtered_addons = {}
     # Find out what the setting for filtering is
     filter_type = Settings.get_filter_type()
@@ -166,8 +166,8 @@ class AddonData:
 
     return filtered_addons
 
-  # Method to get all the addons that are installed and not marked as broken
   def _get_installed_addons(self):
+    """Get list of all installed add-ons that are not marked as broken."""
     # Make the call to find out all the addons that are installed
     # pylint: disable=line-too-long
     json_query = xbmc.executeJSONRPC(
@@ -222,6 +222,7 @@ class AddonData:
     return addons
 
   def _get_addon_settings_directory(self, addon_name):
+    """Get configuration directory under userdata for all installed add-ons."""
     log(f"AddonData: Get add-on settings directory for {addon_name}")
 
     addon_info = Addon(addon_name)
@@ -248,6 +249,7 @@ class AddonData:
     return config_path
 
   def _generate_hash_record(self, addon_details, central_store_location):
+    """Generate XML record entry for add-on's hashsum and write to file."""
     log(f"AddonData: Generating hash record {central_store_location}")
 
     hash_file = os_path_join(central_store_location, "hashdata.xml")
@@ -255,7 +257,7 @@ class AddonData:
     defuse_stdlib()
 
     # <addonsync>
-    #  <addon name='service.addonsync' version ='1.0.0'>hash_value</addon>
+    #   <addon name='service.addonsync' version ='1.0.0'>hash_value</addon>
     # </addonsync>
     try:
       root = ElemenTree.Element("addonsync")
@@ -290,8 +292,8 @@ class AddonData:
           xbmc.LOGERROR,
           )
 
-  # Reads an existing XML file with Hash values in it
   def _load_hash_record(self, record_location):
+    """Read existing XML file from central store with add-on hash values."""
     log(f"AddonData: Loading hash record {record_location}")
 
     hash_file = os_path_join(record_location, "hashdata.xml")
@@ -317,13 +319,10 @@ class AddonData:
         addon_name = element_item.attrib["name"]
         hash_details["name"] = addon_name
         hash_details["version"] = element_item.attrib["version"]
-        hash_details["hash"] = element_item.text
+        hash_details[hash] = element_item.text
         log(
-            "AddonData: Processing entry %s (%s) with hash %s" % (
-                hash_details["name"],
-                hash_details["version"],
-                hash_details["hash"],
-                )
+            f"AddonData: Processing entry {hash_details['name']} "
+            f"({hash_details['version']}) with hash {hash_details[hash]}"
             )
         addon_list[addon_name] = hash_details
     except (ElemenTree.ParseError, OSError, ValueError):
@@ -381,8 +380,8 @@ class AddonData:
         nested_copy(addon_detail["dir"], target_dir)
       except OSError:
         log(
-            "AddonSync: Failed to copy from %s to %s" %
-            (addon_detail["dir"], target_dir),
+            f"AddonSync: Failed to copy from {addon_detail['dir']} "
+            f"to {target_dir}",
             xbmc.LOGERROR,
             )
         log(f"AddonSync: {traceback.format_exc()}", xbmc.LOGERROR)
@@ -415,10 +414,10 @@ class AddonData:
       # Only copy the items with different hash values
       addon_detail = local_addon_details[addon_name]
       backed_up_details = stored_hashsums[addon_name]
-      if addon_detail["hash"] == backed_up_details["hash"]:
+      if addon_detail[hash] == backed_up_details[hash]:
         log(
-            "AddonSync: Backup for addon %s already has matching hash %s" %
-            (addon_name, addon_detail["hash"])
+            f"AddonSync: Backup for addon {addon_name} "
+            f"already has matching hash {addon_detail[hash]}"
             )
         continue
 
@@ -426,11 +425,9 @@ class AddonData:
       if Settings.is_force_version_match(
           ) and addon_detail["version"] != backed_up_details["version"]:
         log(
-            "AddonSync: Version numbers of addon %s are different (%s, %s)" % (
-                addon_name,
-                addon_detail["version"],
-                backed_up_details["version"],
-                )
+            f"AddonSync: Version numbers of add-on {addon_name} "
+            f"are different "
+            f"({addon_detail['version']}, {backed_up_details['version']})"
             )
         continue
 
@@ -444,8 +441,8 @@ class AddonData:
         nested_copy(source_dir, addon_detail["dir"])
       except OSError:
         log(
-            "AddonSync: Failed to copy from %s to %s" %
-            (source_dir, addon_detail["dir"]),
+            f"AddonSync: Failed to copy from {source_dir} "
+            f"to {addon_detail['dir']}",
             xbmc.LOGERROR,
             )
         log(f"AddonSync: {traceback.format_exc()}", xbmc.LOGERROR)
@@ -455,7 +452,7 @@ class AddonData:
         self._restart_addon(addon_name)
 
   def _get_service_addons(self):
-    # Make the call to find out all the service addons that are installed
+    """Create a list of all the installed add-ons of type 'service'."""
     # pylint: disable=line-too-long
     json_query = xbmc.executeJSONRPC(
         '{ "jsonrpc": "2.0", "method": "Addons.GetAddons", "params": { "type": "xbmc.service", "enabled": true, "properties": [ "broken" ] }, "id": 1 }'  # noqa
@@ -488,6 +485,7 @@ class AddonData:
     return service_addons
 
   def _restart_addon(self, addon_name):
+    """After updating local service add-on conf. from central store, restart."""
     log(f"AddonSync: Restarting add-on {addon_name}")
 
     # To restart the addon, first disable it, then enable it
@@ -572,12 +570,10 @@ class AddonSync:
       while not monitor.abortRequested():
         # Check if we are behaving like a master or slave
         if Settings.is_master():
-          # As the master we copy data from the local installation to
-          # a set location
+          # As master: Copy local add-on configs to central store
           addon_data.backup_from_master(central_store_location)
         else:
-          # This is the slave so we will copy from the external
-          # location to our local installation
+          # As slave: Copy add-on configs from central store to local userdata
           addon_data.copy_to_slave(central_store_location)
 
         # Check for the case where we only want to check on startup
