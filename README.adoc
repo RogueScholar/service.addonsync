@@ -21,7 +21,7 @@ SPDX-License-Identifier: CC0-1.0
 :url-ghcommits: https://github.com/RogueScholar/service.addonsync/commits/main
 :url-shieldspgp: https://img.shields.io/keybase/pgp/rscholar?labelColor=moccasin&color=seagreen&logo=keybase&logoColor=darkblue
 :url-keybasepgp: https://keybase.io/rscholar/pgp_keys.asc?fingerprint=dd3f5dec271faa1d2f1182d1ac77588d3f3bca1e
-:url-reusebadge: https://api.reuse.software/badge/github.com/RogueScholar/service.addonsync
+:url-reusebadge: https://img.shields.io/static/v1?label=REUSE&message=compliant&color=seafoamgreen&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAQAAAD8x0bcAAAACXBIWXMAAAsSAAALEgHS3X78AAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAATpJREFUGBmFwT9IVAEcAOCfIVSOEV6LhUvRYA39c7mGSxGLhoxoKLIaGh4RQYcGB+GQ4HSg2y0K1yJNDfemIIjgEUK1VLQEDUoQXQbVePeFVvD82/dFhEnF+B+ptnn7YjtS39x3xkldsRVXDMhkqhZd0xGb0eclMlV8ckrBjlhPw2OJeZOmXLIg8Uox1pJiyQG7NdCUoOVC5GmoG1KN0KOuKbHgnJqS2zrjDwfNaclilX4FZd+1jeCtUqxw2g2fZbHKIX3Oe6dtBE8djhVSH1w0GmGPaV9ULEmMO2Ew/pHijV67PENTBV+VIs8jd133xB0zbnlvTM3eWEvBa2TKWHRWZ2zkpkHPZcp+eOieYUdiPamfJhQdc9VHyypa6rojT6plVredJvyyrIIXjkaeB47HX/arGXVZR+T8Bs2eE6g20974AAAAAElFTkSuQmCC
 :url-reusereport: https://api.reuse.software/info/github.com/RogueScholar/service.addonsync
 :url-shieldspre: https://img.shields.io/static/v1?label=pre&#45;commit&message=enabled&color=brightgreen&logo=pre-commit&logoColor=fab040
 :url-precommit: https://github.com/pre-commit/pre-commit
