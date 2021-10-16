@@ -317,7 +317,7 @@ class AddonData:
       for element_item in hash_record.findall("addon"):
         hash_details = {}
         addon_name = element_item.attrib["name"]
-        hash_details["name"] = addon_name
+        hash_details['name'] = addon_name
         hash_details["version"] = element_item.attrib["version"]
         hash_details[hash] = element_item.text
         log(

@@ -4,6 +4,8 @@ v101.0.2, 2021-10-05: For Kodi v19 "Matrix" and above
 :description: Sync Kodi add-on settings across multiple devices/installations
 :keywords: Kodi, add-on, service, settings, synchronization
 :imagesdir: https://raw.githubusercontent.com/RogueScholar/service.addonsync/main/resources
+:stylesdir: https://raw.githubusercontent.com/RogueScholar/service.addonsync/main/resources/css
+:stylesheet: resources/css/bootstrap_superhero.min.css
 :sectanchors:
 :toc: preamble
 :toclevels: 1
@@ -16,10 +18,15 @@ SPDX-License-Identifier: CC0-1.0
 // Refs:
 :url-shieldssize: https://img.shields.io/github/repo-size/RogueScholar/service.addonsync?color=f5f085&label=add-on%20size&logo=kodi
 :url-shieldscommit: https://img.shields.io/github/last-commit/RogueScholar/service.addonsync?logo=git
-:url-shieldspgp: https://img.shields.io/keybase/pgp/rscholar?color=seagreen&logo=keybase&logoColor=darkgoldenrod
+:url-ghcommits: https://github.com/RogueScholar/service.addonsync/commits/main
+:url-shieldspgp: https://img.shields.io/keybase/pgp/rscholar?labelColor=moccasin&color=seagreen&logo=keybase&logoColor=darkblue
+:url-keybasepgp: https://keybase.io/rscholar/pgp_keys.asc?fingerprint=dd3f5dec271faa1d2f1182d1ac77588d3f3bca1e
 :url-reusebadge: https://api.reuse.software/badge/github.com/RogueScholar/service.addonsync
-:url-shieldspre: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white
-:url-fossabadge: https://app.fossa.com/api/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync.svg?type=small
+:url-reusereport: https://api.reuse.software/info/github.com/RogueScholar/service.addonsync
+:url-shieldspre: https://img.shields.io/static/v1?label=pre&#45;commit&message=enabled&color=brightgreen&logo=pre-commit&logoColor=fab040
+:url-precommit: https://github.com/pre-commit/pre-commit
+:url-ghcodeql: https://github.com/RogueScholar/service.addonsync/actions/workflows/codeql-analysis.yml/badge.svg?branch=main
+:url-qlreport: https://github.com/RogueScholar/service.addonsync/actions/workflows/codeql-analysis.yml
 :url-kodiservao: https://kodi.wiki/view/Service_add-ons
 :url-githubwiki: https://github.com/RogueScholar/service.addonsync/wiki
 :url-zipfile: https://github.com/RogueScholar/service.addonsync/archive/refs/heads/main.zip
@@ -30,17 +37,26 @@ SPDX-License-Identifier: CC0-1.0
 :url-roguescholar: https://github.com/RogueScholar
 :url-kodifoundation: http://kodi.tv/about/foundation
 
-image:{url-shieldssize}[alt="Repository size in bytes",role="left",link=]&nbsp;&nbsp;&nbsp;
-image:{url-shieldscommit}[alt="Last Git commit date",role="left",link="https://github.com/RogueScholar/service.addonsync/commits/main"]&nbsp;&nbsp;&nbsp;
-image:{url-shieldspgp}[alt="Keybase PGP Fingerprint",role="left",link="https://keybase.io/rscholar/pgp_keys.asc?fingerprint=dd3f5dec271faa1d2f1182d1ac77588d3f3bca1e"]&nbsp;&nbsp;&nbsp;
-image:{url-reusebadge}[alt="REUSE badge",role="left",link="https://api.reuse.software/info/github.com/RogueScholar/service.addonsync"]&nbsp;&nbsp;&nbsp;
-image:{url-shieldspre}[alt=Pre-Commit Enabled",role="left",link="https://github.com/pre-commit/pre-commit"]&nbsp;&nbsp;&nbsp;
-image:{url-fossabadge}[alt="FOSSA Status Badge",role="left",link="https://app.fossa.com/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync?ref=badge_small"] +
+[.left]
+--
+image:{url-shieldssize}[alt="Repository size in bytes",link=]&nbsp;&nbsp;&nbsp;
+image:{url-shieldscommit}[alt="Last Git commit date",link={url-ghcommits}]
+&nbsp;&nbsp;&nbsp;
+image:{url-shieldspgp}[alt="Keybase PGP Fingerprint",link={url-keybasepgp}]
+&nbsp;&nbsp;&nbsp;
+image:{url-reusebadge}[alt="REUSE badge",link={url-reusereport}]
+&nbsp;&nbsp;&nbsp;
+image:{url-shieldspre}[alt=Pre-Commit Enabled",link={url-pre-commit}]
+&nbsp;&nbsp;&nbsp;
+image:{url-ghcodeql}[alt="GitHub CodeQL Static Analysis",link={url-qlreport}] +
+--
 
-image::clearlogo.png[alt="AddonSync logo",role="left",width=800,height=310,link="https://kodi.wiki/view/Add-on:AddonSync"]
+image:clearlogo.png[alt="AddonSync logo",role="left",width=800,height=310,link="https://kodi.wiki/view/Add-on:AddonSync"] +
 
 [discrete]
 === _{revremark}_
+
+'''
 
 == Purpose
 
@@ -105,7 +121,73 @@ also omitted from the sync process, so it is left to the user to ensure those
 repos that are required to keep the syncing add-ons upgraded in unison on all
 installations are present and functional.
 
+
+== Repository Layout
+
+.File Tree
+[%hardbreaks%nowrap,.left,tree,symbols="fancy",file="file-tree.png"]
+root
+├── link:.github[.github]
+│     └── link:.github/workflows[workflows]
+│            └── link:.github/workflows/codeql-analysis.yml[codeql-analysis.yml]
+├── link:LICENSES[LICENSES]
+│     ├── link:LICENSES/CC0-1.0.txt[CC0-1.0.txt]
+│     ├── link:LICENSES/GPL-2.0-or-later.txt[GPL-2.0-or-later.txt]
+│     ├── link:LICENSES/MIT.txt[MIT.txt]
+│     └── link:LICENSES/MPL-2.0.txt[MPL-2.0.txt]
+├── link:resources[resources]
+│     ├── link:resources/css[css]
+│     |       ├── link:resources/css/asciidoctor.css[asciidoctor.css]
+│     |       └── link:resources/css/bootstrap_superhero.min.css[bootstrap_superhero.min.css]
+│     ├── link:resources/language[language]
+│     |       ├── link:resources/language/resource.language.en_gb[resource.language.en_gb]
+│     │       |      └── link:resources/language/resource.language.en_gb/strings.po[strings.po]
+│     |       ├── link:resources/language/resource.language.en_us[resource.language.en_us]
+│     │       |      └── link:resources/language/resource.language.en_us/strings.po[strings.po]
+│     |       ├── link:resources/language/resource.language.pt_pt[resource.language.pt_pt]
+│     │       |      └── link:resources/language/resource.language.pt_pt/strings.po[strings.po]
+│     ├── link:resources/lib[lib]
+│     |       ├── link:resources/lib/__init__.py[__init__.py]
+│     |       ├── link:resources/lib/addonsync.py[addonsync.py]
+│     |       ├── link:resources/lib/core.py[core.py]
+│     |       ├── link:resources/lib/filter.py[filter.py]
+│     |       ├── link:resources/lib/service.py[service.py]
+│     |       └── link:resources/lib/settings.py[settings.py]
+│     ├── link:resources/banner.png[banner.png]
+│     ├── link:resources/banner.png.license[banner.png.license]
+│     ├── link:resources/clearlogo.png[clearlogo.png]
+│     ├── link:resources/clearlogo.png.license[clearlogo.png.license]
+│     ├── link:resources/fanart.png[fanart.png]
+│     ├── link:resources/fanart.png.license[fanart.png.license]
+│     ├── link:resources/file-tree.png[file-tree.png]
+│     ├── link:resources/file-tree.png.license[file-tree.png.license]
+│     ├── link:resources/icon.png[icon.png]
+│     ├── link:resources/icon.png.license[icon.png.license]
+│     ├── link:resources/Kodi-logo.png[Kodi-logo.png]
+│     ├── link:resources/Kodi-logo.png.license[Kodi-logo.png.license]
+│     ├── link:resources/screenshot-01.png[screenshot-01.png]
+│     ├── link:resources/screenshot-01.png.license[screenshot-01.png.license]
+│     ├── link:resources/screenshot-02.png[screenshot-02.png]
+│     ├── link:resources/screenshot-02.png.license[screenshot-02.png.license]
+│     ├── link:resources/screenshot-03.png[screenshot-03.png]
+│     ├── link:resources/screenshot-03.png.license[screenshot-03.png.license]
+│     ├── link:resources/settings.xml[settings.xml]
+│     ├── link:resources/social-preview.jpg[social-preview.jpg]
+│     └── link:resources/social-preview.jpg.license[social-preview.jpg.license]
+├── link:.editorconfig[.editorconfig]
+├── link:.gitignore[.gitignore]
+├── link:.pre-commit-config.yaml[.pre-commit-config.yaml]
+├── link:.prospector.yaml[.prospector.yaml]
+├── link:.style.yapf[.style.yapf]
+├── link:addon.xml[addon.xml]
+├── link:LICENSE.adoc[LICENSE.adoc]
+├── link:pylintrc[pylintrc]
+├── link:README.adoc[README.adoc]
+├── link:service.addonsync-v101.0.2.spdx[service.addonsync-v101.0.2.spdx]
+└── link:tox.ini[tox.ini]
+
 == FOSSA Analysis
+
 image::{url-fossawidget}[alt="FOSSA Status Widget",link="https://app.fossa.com/projects/git%2Bgithub.com%2FRogueScholar%2Fservice.addonsync?ref=badge_large"]
 
 [colophon]
