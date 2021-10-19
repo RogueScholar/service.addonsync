@@ -11,3 +11,4 @@
 .settings/
 *.code-workspace
 *.cuda-proj
+*.sublime-*

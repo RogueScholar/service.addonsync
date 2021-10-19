@@ -1,0 +1,90 @@
+# SPDX-FileCopyrightText:  2020-2021 Peter J. Mello <admin@petermello.net>
+#
+# SPDX-License-Identifier: CC0-1.0
+# For more information, see <https://git-scm.com/docs/gitattributes>.
+
+# Global text detection and EOL normalization
+*                                     text=auto
+
+# Python source code files
+*.py                                  text diff=python
+*.py3                                 text diff=python
+*.pyi                                 text diff=python
+*.pyw                                 text diff=python
+*.pyx                                 text diff=python
+*.pyz                                 text diff=python
+*.pxd                                 text diff=python
+
+# Python bytecode binary files
+*.pyc                                 binary export-ignore
+*.pyo                                 binary export-ignore
+*.pyd                                 binary
+
+# Archive files
+*.7z                                  -text diff=lfs filter=lfs merge=lfs
+*.bz2                                 -text diff=lfs filter=lfs merge=lfs
+*.gz                                  -text diff=lfs filter=lfs merge=lfs
+*.lzma                                -text diff=lfs filter=lfs merge=lfs
+*.{r,t}ar                             -text diff=lfs filter=lfs merge=lfs
+*.xz                                  -text diff=lfs filter=lfs merge=lfs
+*.zip                                 -text diff=lfs filter=lfs merge=lfs
+
+# Documents
+*.adoc                                text
+*.bibtex                              text diff=bibtex
+*.csv                                 text
+*.{[mM][dDk]}{,[dotw]}{,e}{,n,wn,xt}  text diff=markdown
+*.tab                                 text
+*.tex                                 text diff=tex
+*.tsv                                 text
+*.txt                                 text
+*.{[pP][dD][fF]}                      -text diff=astextplain filter=lfs merge=lfs
+*.sql                                 text
+
+# Images
+*.eps                                 -text diff=lfs filter=lfs merge=lfs
+*.gif                                 -text diff=lfs filter=lfs merge=lfs
+*.ico                                 -text diff=lfs filter=lfs merge=lfs
+*.jp{eg,g}                            -text diff=lfs filter=lfs merge=lfs
+*.png                                 -text diff=lfs filter=lfs merge=lfs
+*.psd                                 -text diff=lfs filter=lfs merge=lfs
+*.svg                                 text
+*.svgz                                -text diff=lfs filter=lfs merge=lfs
+*.{[tT][iI]}{[fF],[fF][fF]}           -text diff=lfs filter=lfs merge=lfs
+*.web{[mp]}                           -text diff=lfs filter=lfs merge=lfs
+
+# Patches (preserve line endings)
+*.patch                               -text
+
+# Serialization
+*.json                                text
+*.xml                                 text diff=html
+*.y{,a}ml                             text diff=dyff
+
+# Scripts
+## Unix-like
+*.{,ba,fi,z}sh                        text diff=bash eol=lf
+## Windows
+*.{bat,[bB][aA][tT]}                  text eol=crlf
+*.{cmd,[cC][mM][dD]}                  text eol=crlf
+*.{ps1,[pP][sS]1}                     text eol=crlf working-tree-encoding=UTF-16LE-BOM
+
+# Web
+*.css                                 text diff=css
+*.html                                text diff=html
+
+# Excluded from archives
+*.license                             text export-ignore
+*rc                                   text export-ignore
+.*ignore                              text export-ignore
+.editorconfig                         text export-ignore
+.gitattributes                        text export-ignore
+.pre-commit-config.yaml               text export-ignore diff=dyff
+.prospector.yaml                      text export-ignore diff=dyff
+.style.yapf                           text export-ignore
+asciidoctor.css                       text export-ignore
+bootstrap_superhero.min.css           text export-ignore
+bug_report.md                         text export-ignore diff=markdown
+codeql-analysis.yml                   text export-ignore diff=dyff
+feature_request.md                    text export-ignore diff=markdown
+tox.ini                               text export-ignore
