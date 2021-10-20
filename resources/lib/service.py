@@ -12,7 +12,6 @@ SPDX-License-Identifier: MPL-2.0
 See LICENSES/MPL-2.0.txt for more information.
 """
 
-from __future__ import annotations, generator_stop
 from xbmcaddon import Addon
 
 from .core import AddonSync

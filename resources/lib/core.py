@@ -414,7 +414,7 @@ class AddonData:
       # Only copy the items with different hash values
       addon_detail = local_addon_details[addon_name]
       backed_up_details = stored_hashsums[addon_name]
-      if addon_detail[hash] == backed_up_details[hash]:
+      if addon_detail['hash'] == backed_up_details['hash']:
         log(
             f"AddonSync: Backup for addon {addon_name} "
             f"already has matching hash {addon_detail[hash]}"
